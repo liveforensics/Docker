@@ -1,0 +1,2 @@
+# JenkinsWindowsSlave
+Dockerfile for liveforensics/JenkinsWindowsSlave
