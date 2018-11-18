@@ -16,6 +16,7 @@ RUN choco.exe install -y git
 # RUN choco.exe install jdk8 /exclude:32 -y 
 # Now we install Java using chocolatey
 # I've had to wrap the install in a powershell start-process because the install is successful but the stupid installer is returning an error code
+# I think some part of the install cleanup process isn't working properly
 RUN PowerShell.exe -Command "Start-Process -FilePath 'choco.exe' -ArgumentList 'install jdk8 /exclude:32 -y' -PassThru -Wait"
 # RUN refreshenv
 # RUN PowerShell.exe -Command \
@@ -25,6 +26,12 @@ RUN PowerShell.exe -Command "Start-Process -FilePath 'choco.exe' -ArgumentList '
 # $cookie = "oraclelicense=accept-securebackup-cookie"; \
 # $client.Headers.Add([System.Net.HttpRequestHeader]::Cookie, $cookie) ; \
 # $client.downloadFile($source, $destination)'
+RUN mkdir c:\\Persist
+RUN mkdir c:\\JenkinsRoot
+COPY ./jenkins-agent c:\\Persist 
+# RUN PowerShell.exe -Command "Start-Process -FilePath 'c:\persist\jenkins-slave.exe' -ArgumentList 'install' -PassThru -Wait"
+RUN c:\persist\jenkins-slave.exe install
+RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
 # Sets a command or process that will run each time a container is run from the new image
 CMD [ "powershell" ]
 

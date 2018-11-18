@@ -2,7 +2,31 @@ version: '2.1'
 
 services:
   JenkinsWindowsSlave:
-    image: JenkinsWindowsSlave
-    build: .
-    ports:
-      - 5000:5000
+    image: liveforensics/jenkinswindowsslave
+    container_name: JenkinsSlave
+    command: ping -t localhost
+    networks:
+      - jenkins-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # volumes:
+    #   - c:\docker\persistroot:c:\Persist
+  # docker run -d -p 9000:9000 --name portainer --restart always -v \\.\pipe\docker_engine:\\.\pipe\docker_engine -v C:\docker\Portainer:C:\data portainer/portainer
+  # 
+  # portainer:
+  #   image: portainer/portainer
+  #   container_name: portainer
+  #   networks:
+  #       - jenkins-network
+  #   ports:
+  #       - "9000:9000"
+  #   volumes:
+  #       - "\\\\.\\pipe\\docker_engine:\\\\.\\pipe\\docker_engine"
+  #       - c:\docker\portainer:c:\data
+
+networks:
+    jenkins-network:
+        driver: nat
+
+
