@@ -2,11 +2,11 @@
 
 # Indicates that the windowsservercore image will be used as the base image
 # FROM microsoft/windowsservercore
-FROM microsoft/dotnet-framework:4.7.1
+FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803
 
 # Metadata indicating an image maintainer
 MAINTAINER @liveforensics
-
+ 
 # Let's start by installing chocolatey
 RUN PowerShell.exe -Command "Invoke-Expression ((new-object system.net.webclient).downloadstring('https://chocolatey.org/install.ps1'))"
 
@@ -48,7 +48,7 @@ CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowService
 
 
 
-
+ 
 
 
 
