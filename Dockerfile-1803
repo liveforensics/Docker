@@ -23,8 +23,8 @@ RUN mkdir c:\\Persist
 RUN mkdir c:\\JenkinsRoot
 COPY ./jenkins-agent c:\\Persist 
 
-RUN c:\persist\jenkins-slave.exe install
-RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
+#RUN c:\persist\jenkins-slave.exe install
+#RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
 
 SHELL ["cmd", "/S", "/C"]
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\Persist\\vs_buildtools.exe
