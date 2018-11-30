@@ -9,7 +9,9 @@ MAINTAINER @liveforensics
 
 RUN mkdir c:\\Persist
 ADD Wait-Service.ps1 /Wait-Service.ps1
+ADD Change-Logon.ps1 /Change-Logon.ps1
 
+RUN powershell.exe -file c:\Change-Logon.ps1
 
 # Let's start by installing chocolatey
 RUN PowerShell.exe -Command "Invoke-Expression ((new-object system.net.webclient).downloadstring('https://chocolatey.org/install.ps1'))"
@@ -36,7 +38,7 @@ RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
 # RUN sc.exe config jenkinsslave type= own obj= "\Administrator" password= "P@ssw0rd"
 
 # RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
-ADD Change-Logon.ps1 /Change-Logon.ps1
+
 RUN rmdir /S /Q c:\\Persist
 
 CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
