@@ -9,9 +9,9 @@ MAINTAINER @liveforensics
 
 RUN mkdir c:\\Persist
 ADD Wait-Service.ps1 /Wait-Service.ps1
-ADD Change-Logon.ps1 /Change-Logon.ps1
+ADD Create-Account.ps1 /Create-Account.ps1
 
-RUN powershell.exe -file c:\Change-Logon.ps1
+RUN powershell.exe -file c:\Create-Account.ps1
 
 # Let's start by installing chocolatey
 RUN PowerShell.exe -Command "Invoke-Expression ((new-object system.net.webclient).downloadstring('https://chocolatey.org/install.ps1'))"

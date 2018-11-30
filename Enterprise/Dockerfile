@@ -12,6 +12,9 @@ ADD https://aka.ms/vs/15/release/vs_enterprise.exe C:\\Persist\\vs_enterprise.ex
 ADD Wait-Service.ps1 /Wait-Service.ps1
 ADD https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe C:\\Nuget\\nuget.exe
 ADD https://aka.ms/VsCollect/collect.exe c:\\Persist\\collect.exe
+ADD Create-Account.ps1 c:\\persist\\Create-Account.ps1
+
+RUN powershell.exe -file c:\\persist\\create-account.ps1
 
 # Let's start by installing chocolatey
 RUN PowerShell.exe -Command "Invoke-Expression ((new-object system.net.webclient).downloadstring('https://chocolatey.org/install.ps1'))"
