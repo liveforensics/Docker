@@ -10,7 +10,7 @@ MAINTAINER @liveforensics
 RUN mkdir c:\\Persist
 
 
-RUN SETX /M Path "%Path%;C:\\Nuget;C:\\BuildTools\\MSBuild\\15.0\\Bin"
+RUN SETX /M Path "%Path%;C:\\Nuget;C:\\BuildTools\\MSBuild\\15.0\\Bin;C:\BuildTools\Common7\IDE\Extensions\TestPlatform"
 
 # Let's start by installing chocolatey
 RUN PowerShell.exe -Command "Invoke-Expression ((New-Object System.Net.WebClient).Downloadstring('https://chocolatey.org/install.ps1'))"
@@ -33,15 +33,17 @@ RUN PowerShell.exe -Command "Start-Service JenkinsSlave"
 
 
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\Persist\\vs_buildtools.exe
-ADD https://aka.ms/vs/15/release/vs_testagent.exe C:\\Persist\\vs_testagent.exe
+# ADD https://aka.ms/vs/15/release/vs_testagent.exe C:\\Persist\\vs_testagent.exe
 ADD Wait-Service.ps1 /Wait-Service.ps1
 ADD https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe C:\\Nuget\\nuget.exe
-ADD https://aka.ms/VsCollect/collect.exe c:\\Persist\\collect.exe
+# ADD https://aka.ms/VsCollect/collect.exe c:\\Persist\\collect.exe
 
 # Install Build Tools excluding workloads and components with known issues.
 RUN C:\\Persist\\vs_buildtools.exe --quiet --wait --norestart --nocache \
     --installPath C:\\BuildTools \
     --add Microsoft.VisualStudio.Workload.MSBuildTools\
+    --add Microsoft.VisualStudio.Component.TestTools.Core \
+    --add Microsoft.VisualStudio.Component.TestTools.BuildTools \
     --add Microsoft.Net.Component.4.5.2.TargetingPack \
     --add Microsoft.Net.Component.4.5.TargetingPack \
     --add Microsoft.Net.Component.4.6.1.TargetingPack \

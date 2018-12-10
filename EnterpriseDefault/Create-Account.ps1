@@ -9,3 +9,4 @@ net user 'Jenkins' /passwordreq:yes
 
 Get-LocalUser | Where-Object {$_.Name -eq 'Jenkins'} | Select-Object *
 
+Write-Host "Finished"

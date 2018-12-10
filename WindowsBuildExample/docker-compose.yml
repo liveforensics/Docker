@@ -1,30 +1,32 @@
 version: '2.1'
 
-services:  
-
-  JenkinsWindowsSlaveEnt:
-    image: liveforensics/jenkinswindowsslave:ent-1.0.0
-    container_name: JenkinsSlaveEnt
+services:
+  JenkinsWindowsSlave:
+    image: liveforensics/jenkinswindowsslave:1.0.0
+    container_name: JenkinsSlave
+    # command: ping -t localhost
     networks:
       - jenkins-network
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - c:\docker\persistroot:c:\Persist      
-    mem_limit: 2G
-   
-    
-  JenkinsWindowsSlaveEnt2:
-    image: liveforensics/jenkinswindowsslave:ent-1.0.0
-    container_name: JenkinsSlaveEnt2
-    networks:
-      - jenkins-network
-    environment:
-      - JENKINS_URL=http://dockerdude.ukwest.cloudapp.azure.com:10008/computer/DockerTwo/slave-agent.jnlp
-      - JENKINS_SECRET=e2d90db5820bae44edc0d515914e90eade8f129962a8d330d4ae9071cab04a3f
+      - c:\docker\persistroot:c:\Persist
     mem_limit: 2G
 
+  JenkinsWindowsSlave2:
+    image: liveforensics/jenkinswindowsslave:ent
+    container_name: JenkinsSlave2
+    #command: ping -t localhost
+    networks:
+      - jenkins-network
+    build:
+      context: .
+      dockerfile: Dockerfile-enterprise
+    volumes:
+      - c:\docker\persistroot2:c:\Persist      
+    mem_limit: 2G
+    
   # docker run -d -p 9000:9000 --name portainer --restart always -v \\.\pipe\docker_engine:\\.\pipe\docker_engine -v C:\docker\Portainer:C:\data portainer/portainer
   # 
   # portainer:

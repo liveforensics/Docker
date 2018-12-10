@@ -184,6 +184,34 @@ Set-Location c:\jenkins
 
 Start-Service JenkinsSlave
 
+Write-Host "Setting Up Splunk Forwarder"
+$splunkServer = $env:SPLUNK_HOST + ":" + $env:SPLUNK_PORT
+Write-Host "Adding: " $splunkServer
+
+$file = "C:\Program Files\SplunkUniversalForwarder\etc\system\local\inputs.conf"
+$content = (Get-Content -path $file -Raw) -replace '%REPLACEME%', $env:computername
+Remove-Item $file -Force
+$content | Out-File -FilePath $file -Force
+
+$file = "C:\Program Files\SplunkUniversalForwarder\etc\system\local\server.conf"
+$contents = Get-Content -Path $file
+Remove-Item $file -Force
+foreach($line in $contents)
+{    
+    if ($line.StartsWith("serverName"))
+    {
+        Add-Content -Path $file "serverName = $env:computername"
+    }
+    else
+    {
+        Add-Content -Path $file $line
+    }
+}
+
+& 'C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe' login -auth 'admin:P@ssw0rd'
+& 'C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe' add forward-server $splunkServer
+& 'C:\Program Files\SplunkUniversalForwarder\bin\splunk.exe' restart
+
 if ($AllowServiceRestart)
 {
     Wait-Service -ServiceName $ServiceName -StartupTimeout $StartupTimeout -AllowServiceRestart
