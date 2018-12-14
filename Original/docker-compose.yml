@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   JenkinsWindowsSlave:
-    image: liveforensics/jenkinswindowsslave:0.1.0
+    image: liveforensics/jenkinswindowsslave:0.9.0
     container_name: JenkinsSlave
     networks:
       - jenkins-network
