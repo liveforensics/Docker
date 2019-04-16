@@ -12,6 +12,7 @@ RUN apt-get update \
        nano \
        tree \   
        net-tools \
+       iputils-ping \
        wget \
        unzip \
        rsyslog systemd systemd-cron sudo \
