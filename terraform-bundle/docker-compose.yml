@@ -1,0 +1,16 @@
+version: '2.1'
+
+
+services:  
+
+  TerraformBundle:
+    image: liveforensics/terraformbundle:0.0.1
+    container_name: TerraformBundle
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+
+
+
+

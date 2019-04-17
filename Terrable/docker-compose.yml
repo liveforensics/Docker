@@ -7,7 +7,7 @@ volumes:
 services:  
 
   UbuntuTerrable:
-    image: liveforensics/terrable:0.0.6
+    image: liveforensics/terrable:0.0.7
     container_name: UbuntuTerrable
     build:
       context: .
