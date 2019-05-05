@@ -17,7 +17,8 @@ RUN unzip -d terraform-bundle terraform_*.zip
 
 #####################################################################################
 
-FROM ubuntu:18.04
+# FROM ubuntu:18.04
+FROM mcr.microsoft.com/powershell:latest
 
 MAINTAINER @liveforensics
 
@@ -52,12 +53,12 @@ RUN mkdir -p /etc/terraform-projects \
     && mv terraform /usr/local/bin/ \
     && rm terraform_${VER}_linux_amd64.zip
 
-# RUN git clone https://github.com/hashicorp/terraform.git /etc/terraform
-
 # Install Ansible inventory file.
-RUN mkdir -p /etc/ansible
-RUN mkdir -p /etc/ansible-projects
-RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+RUN mkdir -p /etc/ansible \
+    && mkdir -p /etc/projects \
+    && echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+
+WORKDIR /etc/projects
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
 CMD ["/lib/systemd/systemd"]

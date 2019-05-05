@@ -14,7 +14,10 @@ providers {
   # two expressions match different versions then _both_ are included in
   # the bundle archive.
   vsphere = ["~> 1.0"]
-
+  docker = ["~> 1.1"]
+  local = ["~> 1.2"]
+  rabbitmq = ["~> 1.0"]
+  
   # Include a custom plugin to the bundle. Will search for the plugin in the 
   # plugins directory, and package it with the bundle archive. Plugin must have
   # a name of the form: terraform-provider-*, and must be build with the operating

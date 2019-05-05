@@ -1,21 +1,15 @@
 version: '2.1'
 
-volumes:
-  ansible_tmp:
-  terraform_tmp:
-
 services:  
 
-  UbuntuTerrable:
-    image: liveforensics/terrable:0.0.7
-    container_name: UbuntuTerrable
+  Terrable:
+    image: liveforensics/terrable:0.0.8
+    container_name: Terrable
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ansible_tmp:/etc/ansible-projects
-      - terraform_tmp:/etc/terraform-projects
-
+      - e:\code\github\terraform:/etc/projects
 
 
 
