@@ -3,7 +3,7 @@ version: '2.1'
 services:  
 
   Terrable:
-    image: liveforensics/terrable:0.0.8
+    image: liveforensics/terrable:0.0.9
     container_name: Terrable
     build:
       context: .

@@ -2,7 +2,8 @@
 
 # Indicates that the windowsservercore image will be used as the base image
 # FROM microsoft/windowsservercore
-FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803
+# FROM microsoft/dotnet-framework:4.7.2-runtime-windowsservercore-1803
+FROM mcr.microsoft.com/dotnet/framework/runtime4.8-windowsservercore-1903
 
 # Metadata indicating an image maintainer
 MAINTAINER @liveforensics
