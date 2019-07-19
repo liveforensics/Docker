@@ -3,7 +3,7 @@ version: '2.1'
 services:  
 
   Splunkins:
-    image: liveforensics/splunkins:0.1.1
+    image: liveforensics/splunkins:1903
     hostname: SplunkinsOne
     container_name: Splunkins
     networks:
@@ -20,31 +20,31 @@ services:
       - SPLUNK_PORT=10009
     mem_limit: 2G
    
-  Splunkins2:
-    image: liveforensics/splunkins:0.1.1
-    hostname: SplunkinsTwo
-    container_name: Splunkins2
-    networks:
-      - jenkins-network
-    environment:
-      - JENKINS_URL=http://dockerdude.ukwest.cloudapp.azure.com:10008/computer/DockerTwo/slave-agent.jnlp
-      - JENKINS_SECRET=e2d90db5820bae44edc0d515914e90eade8f129962a8d330d4ae9071cab04a3f 
-      - SPLUNK_HOST=dockerdude.ukwest.cloudapp.azure.com
-      - SPLUNK_PORT=10009
-    mem_limit: 2G
+  # Splunkins2:
+  #   image: liveforensics/splunkins:0.1.1
+  #   hostname: SplunkinsTwo
+  #   container_name: Splunkins2
+  #   networks:
+  #     - jenkins-network
+  #   environment:
+  #     - JENKINS_URL=http://dockerdude.ukwest.cloudapp.azure.com:10008/computer/DockerTwo/slave-agent.jnlp
+  #     - JENKINS_SECRET=e2d90db5820bae44edc0d515914e90eade8f129962a8d330d4ae9071cab04a3f 
+  #     - SPLUNK_HOST=dockerdude.ukwest.cloudapp.azure.com
+  #     - SPLUNK_PORT=10009
+  #   mem_limit: 2G
    
-  Splunkins3:
-    image: liveforensics/splunkins:0.1.1
-    hostname: SplunkinsThree
-    container_name: Splunkins3
-    networks:
-      - jenkins-network
-    environment:
-      - JENKINS_URL=http://dockerdude.ukwest.cloudapp.azure.com:10008/computer/DockerThree/slave-agent.jnlp
-      - JENKINS_SECRET=dd0907cf11f37b0a4e294e5cd7e86adf4e1b4767b9ea8b85990fba8f4c261bd8 
-      - SPLUNK_HOST=dockerdude.ukwest.cloudapp.azure.com
-      - SPLUNK_PORT=10009
-    mem_limit: 2G
+  # Splunkins3:
+  #   image: liveforensics/splunkins:0.1.1
+  #   hostname: SplunkinsThree
+  #   container_name: Splunkins3
+  #   networks:
+  #     - jenkins-network
+  #   environment:
+  #     - JENKINS_URL=http://dockerdude.ukwest.cloudapp.azure.com:10008/computer/DockerThree/slave-agent.jnlp
+  #     - JENKINS_SECRET=dd0907cf11f37b0a4e294e5cd7e86adf4e1b4767b9ea8b85990fba8f4c261bd8 
+  #     - SPLUNK_HOST=dockerdude.ukwest.cloudapp.azure.com
+  #     - SPLUNK_PORT=10009
+  #   mem_limit: 2G
    
 
 networks:
