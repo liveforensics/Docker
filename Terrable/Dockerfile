@@ -3,7 +3,7 @@ FROM golang:alpine as terraform-bundler-build
 RUN apk --no-cache add git unzip tree
 RUN git clone https://github.com/hashicorp/terraform.git /etc/mark
 WORKDIR /etc/mark
-RUN git checkout v0.11
+RUN git checkout v0.12.5
 # WORKDIR /go
 # RUN tree
 # RUN go get -d -u github.com/hashicorp/terraform@v0.11
@@ -45,7 +45,7 @@ COPY --from=terraform-bundler-build /etc/mark/terraform-bundle/* /usr/local/bin/
 
 # Install Ansible via Pip.
 RUN pip install ansible pyopenssl markupsafe xmltodict pywinrm 
-ARG VER="0.11.14"
+ARG VER="0.12.5"
 
 RUN mkdir -p /etc/terraform-projects \
     && wget https://releases.hashicorp.com/terraform/${VER}/terraform_${VER}_linux_amd64.zip \
