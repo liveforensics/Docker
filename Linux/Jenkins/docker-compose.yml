@@ -1,0 +1,24 @@
+version: '2.1'
+
+services:
+  Jenkins:
+    image: jenkins
+    container_name: JenkinsMaster
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      app_net:
+        ipv4_address: 192.168.0.109
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+volumes:
+  jenkins_home:
+
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"

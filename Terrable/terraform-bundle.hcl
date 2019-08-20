@@ -1,7 +1,7 @@
 terraform {
   # Version of Terraform to include in the bundle. An exact version number
   # is required.
-  version = "0.11.14"
+  version = "0.12.5"
 }
 
 # Define which provider plugins are to be included
@@ -13,10 +13,10 @@ providers {
   # Each item in these lists allows a distinct version to be added. If the
   # two expressions match different versions then _both_ are included in
   # the bundle archive.
-  vsphere = ["~> 1.0"]
-  docker = ["~> 1.1"]
-  local = ["~> 1.2"]
-  rabbitmq = ["~> 1.0"]
+  vsphere = ["~> 1.12"]
+  docker = ["~> 2.1"]
+  local = ["~> 1.3"]
+  rabbitmq = ["~> 1.1"]
   null = ["~> 2.1"]
   random = ["~> 2.1"]
   bitbucket = ["~> 1.0"]

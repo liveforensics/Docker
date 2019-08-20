@@ -3,13 +3,13 @@ version: '2.1'
 services:  
 
   Terrable:
-    image: liveforensics/terrable:0.0.9
+    image: liveforensics/terrable:0.1.0
     container_name: Terrable
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - e:\code\github\terraform:/etc/projects
+      - /home/mark/docker/UserVolumes/Terrable:/etc/projects
 
 
 
