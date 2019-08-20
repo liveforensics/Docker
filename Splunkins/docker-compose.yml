@@ -3,7 +3,7 @@ version: '2.1'
 services:  
 
   Splunkins:
-    image: liveforensics/splunkins:1903
+    image: liveforensics/splunkins:1903-b
     hostname: SplunkinsOne
     container_name: Splunkins
     networks:

@@ -27,7 +27,7 @@ THE SOFTWARE.
   <name>Jenkins agent (jenkinsslave)</name>
   <description>This service runs an agent for Jenkins automation server.</description>
   
-  <executable>C:\Program Files\java\jdk1.8.0_191\bin\java.exe</executable>
+  <executable>%JAVA_HOME%\bin\java.exe</executable>
   <arguments>-Xrs  -jar "c:\jenkins\slave.jar" -jnlpUrl %JENKINS_URL% -secret %JENKINS_SECRET% -workDir c:\JenkinsRoot</arguments>
   
   <logmode>rotate</logmode>
