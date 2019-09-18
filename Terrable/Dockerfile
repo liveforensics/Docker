@@ -31,6 +31,7 @@ RUN apt-get update \
        git-core \    
        nano \
        tree \   
+       ssh \
        net-tools \
        iputils-ping \
        wget \
