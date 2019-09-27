@@ -28,7 +28,7 @@ THE SOFTWARE.
   <description>This service runs an agent for Jenkins automation server.</description>
   
   <executable>%JAVA_HOME%\bin\java.exe</executable>
-  <arguments>-Xrs  -jar "c:\jenkins\slave.jar" -jnlpUrl %JENKINS_URL% -secret %JENKINS_SECRET% -workDir c:\JenkinsRoot</arguments>
+  <arguments>-Xrs -Xmx64m -jar "c:\jenkins\slave.jar" -jnlpUrl %JENKINS_URL% -secret %JENKINS_SECRET% -workDir c:\JenkinsRoot</arguments>
   
   <logmode>rotate</logmode>
 
