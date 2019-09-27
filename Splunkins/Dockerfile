@@ -3,7 +3,7 @@
 # Indicates that the windowsservercore image will be used as the base image
 # FROM microsoft/windowsservercore
 # FROM liveforensics/jenkinswindowsslave:ent-1.0.0
-FROM liveforensics/jenkinswindowsslave:1903-b
+FROM liveforensics/jenkinswindowsslave:1903-c
 
 # Metadata indicating an image maintainer
 MAINTAINER @liveforensics

@@ -3,7 +3,7 @@ version: '2.1'
 services:  
 
   JenkinsWindowsSlaveEnt:
-    image: liveforensics/jenkinswindowsslave:1903-b
+    image: liveforensics/jenkinswindowsslave:1903-c
     container_name: JenkinsSlaveEnt
     networks:
       - jenkins-network
