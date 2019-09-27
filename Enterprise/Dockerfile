@@ -38,14 +38,14 @@ RUN PowerShell.exe -Command "Start-Process -FilePath 'choco.exe' -ArgumentList '
 RUN C:\\Persist\\vs_enterprise.exe --quiet --wait --norestart --nocache \
     --installPath C:\\BuildTools \
     --add Microsoft.Component.MSBuild \
-    --add Microsoft.VisualStudio.Component.TestTools.Core \
-    --add Microsoft.VisualStudio.Component.TestTools.BuildTools \
-    --add Microsoft.VisualStudio.Component.TestTools.MicrosoftTestManager \
-    --add Microsoft.Net.Component.4.5.TargetingPack \
-    --add Microsoft.VisualStudio.Workload.VCTools \
-    --add Microsoft.VisualStudio.Component.Windows81SDK \
-    --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop \
-    --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 \
+    # --add Microsoft.VisualStudio.Component.TestTools.Core \
+    # --add Microsoft.VisualStudio.Component.TestTools.BuildTools \
+    # --add Microsoft.VisualStudio.Component.TestTools.MicrosoftTestManager \
+    # --add Microsoft.Net.Component.4.5.TargetingPack \
+    # --add Microsoft.VisualStudio.Workload.VCTools \
+    # --add Microsoft.VisualStudio.Component.Windows81SDK \
+    # --add Microsoft.VisualStudio.Component.Windows10SDK.15063.Desktop \
+    # --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 \
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
 RUN rmdir /S /Q c:\\Persist
