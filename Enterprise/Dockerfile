@@ -28,6 +28,7 @@ RUN PowerShell.exe -Command "Invoke-Expression ((new-object system.net.webclient
 
 # Now we'll install the git client using chocolatey
 RUN choco.exe install -y git
+RUN choco.exe install -y python2
 
 # Now we install Java using chocolatey
 # I've had to wrap the install in a powershell start-process because the install is successful but the stupid installer is returning an error code
