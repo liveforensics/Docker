@@ -41,7 +41,7 @@ RUN C:\\Persist\\vs_enterprise.exe --quiet --wait --norestart --nocache \
     --add Microsoft.Component.MSBuild \
     --add Microsoft.VisualStudio.Component.Windows10SDK.18362 \
     --add Microsoft.VisualStudio.Component.Windows10SDK.16299 \
-    --add Microsoft.VisualStudio.Component.Windows81SDK
+    --add Microsoft.VisualStudio.Component.Windows81SDK \
     # --add Microsoft.VisualStudio.Component.TestTools.Core \
     # --add Microsoft.VisualStudio.Component.TestTools.BuildTools \
     # --add Microsoft.VisualStudio.Component.TestTools.MicrosoftTestManager \
