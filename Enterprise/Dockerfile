@@ -11,7 +11,7 @@ MAINTAINER @liveforensics
 RUN mkdir c:\\Persist
 RUN mkdir c:\\Jenkins
 RUN mkdir c:\\JenkinsRoot
-ADD https://aka.ms/vs/15/release/vs_enterprise.exe C:\\Persist\\vs_enterprise.exe
+ADD https://aka.ms/vs/16/release/vs_enterprise.exe C:\\Persist\\vs_enterprise.exe
 ADD Wait-Service.ps1 /Wait-Service.ps1
 ADD https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe C:\\Nuget\\nuget.exe
 ADD https://aka.ms/VsCollect/collect.exe c:\\Persist\\collect.exe
@@ -36,12 +36,12 @@ RUN choco.exe install -y python2
 RUN PowerShell.exe -Command "Start-Process -FilePath 'choco.exe' -ArgumentList 'install jdk8 /exclude:32 -y' -PassThru -Wait"
 
 # Install Build Tools excluding workloads and components with known issues.
-RUN C:\\Persist\\vs_enterprise.exe --quiet --wait --norestart --nocache \
+RUN C:\\Persist\\vs_enterprise.exe --quiet --wait --norestart --nocache --all \
     --installPath C:\\BuildTools \
-    --add Microsoft.Component.MSBuild \
-    --add Microsoft.VisualStudio.Component.Windows10SDK.18362 \
-    --add Microsoft.VisualStudio.Component.Windows10SDK.16299 \
-    --add Microsoft.VisualStudio.Component.Windows81SDK \
+    # --add Microsoft.Component.MSBuild \
+    # --add Microsoft.VisualStudio.Component.Windows10SDK.18362 \
+    # --add Microsoft.VisualStudio.Component.Windows10SDK.16299 \
+    # --add Microsoft.VisualStudio.Component.Windows81SDK \
     # --add Microsoft.VisualStudio.Component.TestTools.Core \
     # --add Microsoft.VisualStudio.Component.TestTools.BuildTools \
     # --add Microsoft.VisualStudio.Component.TestTools.MicrosoftTestManager \
