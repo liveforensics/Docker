@@ -3,7 +3,7 @@ version: '2.1'
 services:  
 
   JenkinsWindowsSlaveEnt:
-    image: liveforensics/jenkinswindowsslave:1903-all
+    image: liveforensics/jenkinswindowsslave:1903-f
     container_name: JenkinsSlaveEnt
     networks:
       - jenkins-network
@@ -12,6 +12,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - c:\docker\persistroot:c:\Persist      
+      # - c:\docker\buildtools:c:\BuildTools
+      # - 'c:\docker\kits:c:\Program Files (x86)\Windows Kits'
     mem_limit: 2G
    
     
