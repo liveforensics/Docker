@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+
+  LinuxSlave:
+    image: liveforensics/linuxslave:latest
+    container_name: LinuxSlave
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    mem_limit: 2G
+    

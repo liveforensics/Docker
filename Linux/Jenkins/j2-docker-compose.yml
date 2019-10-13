@@ -1,17 +1,17 @@
 version: '2.1'
 
 services:
-  Jenkins:
+  Jenkins2:
     image: jenkins/jenkins:lts
-    container_name: JenkinsMaster
+    container_name: JenkinsMaster2
     volumes:
-      - c:\temp\Jenkins_home:/var/jenkins_home
+      - c:\temp\Jenkins_home2:/var/jenkins_home
     # networks:
     #   app_net:
     #     ipv4_address: 192.168.0.109
     ports:
-      - "8080:8080"
-      - "50000:50000"
+      - "8081:8080"
+      - "50001:50000"
 
 volumes:
   jenkins_home:
