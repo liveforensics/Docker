@@ -50,6 +50,10 @@ RUN C:\Temp\Install.cmd C:\Temp\vs_enterprise.exe --quiet --wait --norestart --n
     --installPath C:\BuildTools
 
 RUN rmdir /S /Q c:\Persist
+RUN rmdir /S /Q c:\BuildTools
+RUN rmdir /S /Q c:\Windows\Microsoft.NET
+RUN rmdir /S /Q "c:\Program Files (x86)\Windows Kits"
+
 
 # Use developer command prompt and start PowerShell if no other command specified.
 # CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass", "-file", "c:\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart"]

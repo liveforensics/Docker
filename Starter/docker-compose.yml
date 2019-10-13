@@ -3,7 +3,7 @@ version: '2.2'
 services:  
 
   BuildSlave:
-    image: liveforensics/buildslave:1.0.0
+    image: liveforensics/buildslave:1.0.1
     container_name: buildslave
     hostname: buildslave
     networks:
@@ -12,7 +12,10 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - c:\docker\persistroot:c:\Persist      
+      - c:\docker\persistroot:c:\Persist    
+      - c:\docker\buildtools:c:\BuildTools
+      - c:\docker\Microsoft.NET:c:\Windows\Microsoft.NET
+      - c:\docker\Windows Kits:c:\program files (x86)\Windows Kits
 
     mem_limit: 2G
    
