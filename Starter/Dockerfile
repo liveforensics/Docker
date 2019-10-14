@@ -94,3 +94,6 @@ RUN rmdir /S /Q c:\Persist
 # Use developer command prompt and start PowerShell if no other command specified.
 # CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass", "-file", "c:\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart"]
 CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
+
+# c:\programdata\packagecache
+# c:\windows\assembly
