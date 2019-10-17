@@ -39,10 +39,10 @@ ADD ${CHANNEL_URL} C:\Temp\VisualStudio.chman
 
 # Download and install Build Tools for Visual Studio 2017 for native desktop workload.
 ADD https://aka.ms/vs/16/release/vs_enterprise.exe C:\Temp\vs_enterprise.exe
-RUN C:\Temp\Install.cmd C:\Temp\vs_enterprise.exe --quiet --wait --norestart --nocache `
-    --channelUri C:\Temp\VisualStudio.chman `
-    --installChannelUri C:\Temp\VisualStudio.chman `
-    --add Microsoft.Component.MSBuild `
+# RUN C:\Temp\Install.cmd C:\Temp\vs_enterprise.exe --quiet --wait --norestart --nocache `
+#     --channelUri C:\Temp\VisualStudio.chman `
+#     --installChannelUri C:\Temp\VisualStudio.chman `
+    # --add Microsoft.Component.MSBuild `
     # --add Microsoft.VisualStudio.Workload.NativeDesktop `
     # --add Microsoft.VisualStudio.Workload.ManagedDesktop `
     # --add Microsoft.VisualStudio.Workload.Universal `
@@ -50,7 +50,6 @@ RUN C:\Temp\Install.cmd C:\Temp\vs_enterprise.exe --quiet --wait --norestart --n
     # --add Microsoft.Net.Component.4.5.1.TargetingPack `
     # --add Microsoft.Net.Component.4.5.2.TargetingPack `
     # --add Microsoft.Net.Component.3.5.DeveloperTools `
-    # --add Microsoft.Net.Component.4.5.TargetingPack `
     # --add Microsoft.Net.Component.4.6.TargetingPack `
     # --add Microsoft.Net.Component.4.6.1.TargetingPack `
     # --add Microsoft.Net.ComponentGroup.4.6.1.DeveloperTools `
@@ -84,7 +83,7 @@ RUN C:\Temp\Install.cmd C:\Temp\vs_enterprise.exe --quiet --wait --norestart --n
     # --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 `
     # --add Component.CPython3.x64 `
     # --includeRecommended `
-    --installPath C:\BuildTools
+    # --installPath C:\BuildTools
 
 RUN rmdir /S /Q c:\Persist
 # RUN rmdir /S /Q c:\BuildTools

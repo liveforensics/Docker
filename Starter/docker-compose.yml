@@ -3,7 +3,7 @@ version: '2.2'
 services:  
 
   BuildSlave:
-    image: liveforensics/buildslave:1.0.7
+    image: liveforensics/buildslave:novs
     container_name: buildslave
     hostname: buildslave
     networks:
@@ -19,9 +19,10 @@ services:
       - c:\docker\volumes\Microsoft SDKs:c:\Program Files (x86)\Microsoft SDKs
       - c:\docker\volumes\Microsoft Visual Studio:c:\Program Files (x86)\Microsoft Visual Studio
       - c:\docker\volumes\Microsoft Visual Studio 14.0:c:\Program Files (x86)\Microsoft Visual Studio 14.0
-      
+      - c:\docker\volumes\Reference Assemblies:c:\Program Files (x86)\Reference Assemblies
+    
 
-    mem_limit: 2G
+    mem_limit: 4G
    
     
   # JenkinsWindowsSlaveEnt2:
