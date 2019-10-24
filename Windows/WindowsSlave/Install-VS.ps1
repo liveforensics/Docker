@@ -4,14 +4,14 @@ Get-ChildItem -Recurse C:\Temp
 Write-Host "Creating new folders.."
 New-Item -ItemType Directory -Path c:\BuildTools
 
-choco install -y visualstudio2017-workload-vctools --params "--includeOptional"
+# choco install -y visualstudio2017-workload-vctools --params "--includeOptional"
 # choco install -y visualstudio2017buildtools --package-parameters "--installPath C:\BuildTools --allWorkloads --includeRecommended --includeOptional --passive --locale en-US"
 
-# cmd.exe /S /C c:\temp\install.cmd c:\temp\vs_enterprise.exe --quiet --wait --norestart --nocache `
-# --channelUri C:\Temp\VisualStudio.chman `
-# --installChannelUri C:\Temp\VisualStudio.chman `
-# --installPath C:\BuildTools `
-# --add Microsoft.Component.MSBuild `
+c:\temp\install.cmd c:\temp\vs_enterprise.exe --quiet --wait --norestart --nocache `
+--channelUri C:\Temp\VisualStudio.chman `
+--installChannelUri C:\Temp\VisualStudio.chman `
+--installPath C:\BuildTools `
+--add Microsoft.Component.MSBuild
 # --add Microsoft.VisualStudio.Workload.NativeDesktop `
 # --add Microsoft.VisualStudio.Workload.ManagedDesktop `
 # --add Microsoft.VisualStudio.Workload.Universal `

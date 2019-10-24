@@ -11,6 +11,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - c:\docker\persistroot:c:\Persist    
+      - E:\Visual Studio Layout\BuildTools:c:\vs_BuildTools
 
     mem_limit: 4G
    
