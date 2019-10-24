@@ -147,42 +147,42 @@ function Wait-Service()
     return $serviceStatus.win32ExitCode
 }
 
-# Write-Host "Setting Up Jenkins"
+Write-Host "Setting Up Jenkins"
 
-# if(Test-Path c:\persist)
-# {
-#     Write-Host "PERSIST Volume Mount Exists"
-#     if(Test-Path c:\persist\slave.jar)
-#     {
-#         Write-Host "Overwriting slave.jar with the one in Persist"
-#         Copy-Item c:\persist\slave.jar -Destination c:\Jenkins\slave.jar -Force
-#     }
-#     if(Test-Path c:\persist\jenkins-slave.exe)
-#     {
-#         Write-Host "Overwriting jenkins-slave.exe with the one in Persist"
-#         Copy-Item c:\persist\jenkins-slave.exe -Destination c:\Jenkins\jenkins-slave.exe -Force
-#     }
-#     if(Test-Path c:\persist\jenkins-slave.exe.config)
-#     {
-#         Write-Host "Overwriting jenkins-slave.exe.config with the one in Persist"
-#         Copy-Item c:\persist\jenkins-slave.exe.config -Destination c:\Jenkins\jenkins-slave.exe.config -Force
-#     }
-# }
+if(Test-Path c:\persist)
+{
+    Write-Host "PERSIST Volume Mount Exists"
+    if(Test-Path c:\persist\slave.jar)
+    {
+        Write-Host "Overwriting slave.jar with the one in Persist"
+        Copy-Item c:\persist\slave.jar -Destination c:\Jenkins\slave.jar -Force
+    }
+    if(Test-Path c:\persist\jenkins-slave.exe)
+    {
+        Write-Host "Overwriting jenkins-slave.exe with the one in Persist"
+        Copy-Item c:\persist\jenkins-slave.exe -Destination c:\Jenkins\jenkins-slave.exe -Force
+    }
+    if(Test-Path c:\persist\jenkins-slave.exe.config)
+    {
+        Write-Host "Overwriting jenkins-slave.exe.config with the one in Persist"
+        Copy-Item c:\persist\jenkins-slave.exe.config -Destination c:\Jenkins\jenkins-slave.exe.config -Force
+    }
+}
 
-# if(Test-Path c:\Jenkins\jenkins-slave-xml.bak)
-# {
-#     Write-Host "Creating config file"
-#     $content = ((Get-Content -path c:\Jenkins\jenkins-slave-xml.bak -Raw) -replace '%JENKINS_URL%', $env:JENKINS_URL) -replace '%JENKINS_SECRET%', $env:JENKINS_SECRET
-#     $content | Out-File -FilePath c:\jenkins\jenkins-slave.xml -Force
-#     Write-Host "Jenkins Url" $env:JENKINS_URL
-#     Write-Host "Jenkins Secret" $env:JENKINS_SECRET
-# }
+if(Test-Path c:\Jenkins\jenkins-slave-xml.bak)
+{
+    Write-Host "Creating config file"
+    $content = ((Get-Content -path c:\Jenkins\jenkins-slave-xml.bak -Raw) -replace '%JENKINS_URL%', $env:JENKINS_URL) -replace '%JENKINS_SECRET%', $env:JENKINS_SECRET
+    $content | Out-File -FilePath c:\jenkins\jenkins-slave.xml -Force
+    Write-Host "Jenkins Url" $env:JENKINS_URL
+    Write-Host "Jenkins Secret" $env:JENKINS_SECRET
+}
 
-# Set-Location c:\jenkins
+Set-Location c:\jenkins
 
-# .\jenkins-slave.exe install
+.\jenkins-slave.exe install
 
-# Start-Service JenkinsSlave
+Start-Service JenkinsSlave
 
 if ($AllowServiceRestart)
 {
