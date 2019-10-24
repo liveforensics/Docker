@@ -1,0 +1,22 @@
+version: '2.2'
+
+services:  
+
+  SlaveBase:
+    image: liveforensics/slavebase:1.0.0
+    container_name: slavebase
+    hostname: slavebase
+    networks:
+      - jenkins-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    mem_limit: 4G
+   
+  
+networks:
+    jenkins-network:
+        driver: nat
+
+

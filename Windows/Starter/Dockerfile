@@ -7,8 +7,12 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-1903
 # Reset the shell.
 SHELL ["cmd", "/S", "/C"]
 
+RUN mkdir c:\Persist
 RUN mkdir c:\Jenkins
 RUN mkdir c:\JenkinsRoot
+RUN mkdir c:\SplunkForward
+ADD https://download.splunk.com/products/universalforwarder/releases/7.3.2/windows/splunkforwarder-7.3.2-c60db69f8e32-x64-release.msi  c:\persist\splunk_installer.msi
+ADD SplunkInstall.ps1 c:\persist\SplunkInstall.ps1
 ADD Wait-Service.ps1 /Wait-Service.ps1
 ADD https://dist.nuget.org/win-x86-commandline/v5.3.0/nuget.exe C:\Nuget\nuget.exe
 ADD Create-Account.ps1 c:\persist\Create-Account.ps1
@@ -16,9 +20,11 @@ ADD ./jenkins-agent c:\Jenkins
 
 ENV JENKINS_SECRET '0011111111111111111111111111111111111111111111111111111111111111c632'
 ENV JENKINS_URL 'http://doh.com/computer/DockerOne/slave-agent.jnlp'
+ENV SPLUNK_HOST 'dockerdude.ukwest.cloudapp.azure.com'
+ENV SPLUNK_PORT '10009'
 
 RUN powershell.exe -file c:\\persist\\create-account.ps1
-RUN SETX /M Path "%Path%;C:\\Nuget;c:\\python27amd64;C:\\BuildTools\\MSBuild\\Current\\Bin;C:\BuildTools\Common7\IDE\Extensions\TestPlatform;C:\BuildTools\Team Tools\Dynamic Code Coverage Tools"
+RUN SETX /M Path "%Path%;C:\Program Files\SplunkUniversalForwarder\bin\;C:\Nuget;c:\python27amd64;C:\BuildTools\MSBuild\Current\Bin;C:\BuildTools\Common7\IDE\Extensions\TestPlatform;C:\BuildTools\Team Tools\Dynamic Code Coverage Tools"
 # Set up environment to collect install errors.
 COPY Install.cmd C:\Temp\
 ADD https://aka.ms/vscollect.exe C:\Temp\collect.exe
@@ -33,6 +39,12 @@ RUN choco.exe install -y git
 # I've had to wrap the install in a powershell start-process because the install is successful but the stupid installer is returning an error code
 # I think some part of the install cleanup process isn't working properly
 RUN PowerShell.exe -Command "Start-Process -FilePath 'choco.exe' -ArgumentList 'install jdk8 /exclude:32 -y' -PassThru -Wait"
+
+RUN PowerShell.exe -Command "Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i c:\persist\splunk_installer.msi AGREETOLICENSE=yes SPLUNKPASSWORD=P@ssw0rd PERFMON=diskspace,memory LAUNCHSPLUNK=0 /quiet' -PassThru -Wait"
+# RUN ["msiexec.exe", "/i", "c:\persist\splunk_installer.msi", "AGREETOLICENSE=yes", "SPLUNKPASSWORD=P@ssw0rd", "PERFMON=diskspace,memory", "LAUNCHSPLUNK=0", "/quiet"]
+RUN powershell.exe -file c:\persist\SplunkInstall.ps1
+
+
 # Download channel for fixed install.
 ARG CHANNEL_URL=https://aka.ms/vs/16/release/channel
 ADD ${CHANNEL_URL} C:\Temp\VisualStudio.chman
