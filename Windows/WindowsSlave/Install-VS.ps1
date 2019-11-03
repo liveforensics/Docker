@@ -37,6 +37,7 @@ c:\temp\install.cmd c:\temp\vs_enterprise.exe --quiet --wait --norestart --nocac
 # --add Microsoft.Component.PythonTools `
 # --add Microsoft.VisualStudio.Workload.Python `
 # --add Component.CPython2.x64 `
+# --add Microsoft.VisualStudio.Component.Windows81SDK `
 # --add Microsoft.VisualStudio.Component.Windows10SDK `
 # --add Microsoft.VisualStudio.Component.Windows10SDK.16299 `
 # --add Microsoft.VisualStudio.Component.Windows10SDK.17134 `
