@@ -167,6 +167,18 @@ if(Test-Path c:\persist)
         Write-Host "Overwriting jenkins-slave.exe.config with the one in Persist"
         Copy-Item c:\persist\jenkins-slave.exe.config -Destination c:\Jenkins\jenkins-slave.exe.config -Force
     }
+    # Update Splunk configs if required
+    if(Test-Path 'C:\Program Files\SplunkUniversalForwarder\etc\system\local')
+    {
+        if(Test-Path c:\persist\inputs.conf)
+        {
+            Copy-Item c:\persist\inputs.conf -Force -Destination 'C:\Program Files\SplunkUniversalForwarder\etc\system\local'
+        }
+        if(Test-Path c:\persist\outputs.conf)
+        {
+            Copy-Item c:\persist\outputs.conf -Force -Destination 'C:\Program Files\SplunkUniversalForwarder\etc\system\local'
+        }
+    }
 }
 
 if(Test-Path c:\Jenkins\jenkins-slave-xml.bak)
@@ -183,6 +195,11 @@ Set-Location c:\jenkins
 .\jenkins-slave.exe install
 
 Start-Service JenkinsSlave
+$stat = Get-Service SplunkForwarder
+if ($stat.Status -eq "Stopped")
+{
+    Start-Service SplunkForwarder
+}
 
 if ($AllowServiceRestart)
 {

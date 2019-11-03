@@ -1,14 +1,12 @@
 # versions
 $splunkVersion = "7.3.2"
 $splunkGuid = "c60db69f8e32"
-$nugetVersion = "5.3.0"
 
 Write-Host "#################################################### Creating Slave Base #############################################################################"
 Write-Host "Creating new folders.."
 New-Item -ItemType Directory -Path c:\Jenkins
 New-Item -ItemType Directory -Path c:\JenkinsRoot
 New-Item -ItemType Directory -Path c:\SplunkForward
-New-Item -ItemType Directory -Path c:\Nuget
 New-Item -ItemType Directory -Path c:\Temp
 
 Write-Host "`nPulling Splunk Forwarder Version " $splunkVersion
@@ -28,19 +26,6 @@ if(Test-Path c:\persist\splunk_installer.msi)
 else {
     Write-Error "Splunk Installer didn't download - $($downloadUrl)"
 }
-Write-Host "Pulling Nuget"
-$downloadUrl = "https://dist.nuget.org/win-x86-commandline/v$($nugetVersion)/nuget.exe"
-Invoke-WebRequest -Uri $downloadUrl -OutFile "C:\Nuget\nuget.exe"
-
-Write-Host "Pulling Visual Studio Installer"
-$downloadUrl = "https://aka.ms/vs/16/release/vs_enterprise.exe"
-Invoke-WebRequest -Uri $downloadUrl -OutFile "C:\Temp\vs_enterprise.exe"
-$downloadUrl = "https://aka.ms/vscollect.exe"
-Invoke-WebRequest -Uri $downloadUrl -OutFile "C:\Temp\collect.exe"
-$downloadUrl = "https://aka.ms/vs/16/release/vs_BuildTools.exe"
-Invoke-WebRequest -Uri $downloadUrl -OutFile "C:\Temp\vs_BuildTools.exe"
-
-Get-ChildItem -Recurse C:\Temp
 
 Write-Host "Installing chocolatey"
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))

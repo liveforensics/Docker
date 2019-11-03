@@ -1,14 +1,14 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
-LABEL maintainer=compulim@hotmail.com description="MSBuild 2017"
+# FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM liveforensics/slavebase:1.0.0
+LABEL maintainer=liveforensics description="Windows Jenkins Windows Build Slave"
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
 
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\Downloads\\vs_buildtools.exe
 ADD https://dist.nuget.org/win-x86-commandline/latest/nuget.exe C:\\Nuget\\nuget.exe
-ADD \code c:\code
 
 RUN C:\\Downloads\\vs_buildtools.exe `
     --add Microsoft.VisualStudio.Workload.MSBuildTools `
@@ -58,5 +58,3 @@ RUN C:\\Downloads\\vs_buildtools.exe `
     --quiet --wait
 RUN SETX /M Path "%Path%;C:\\Nuget;C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\MSBuild\\15.0\\Bin"
 
-# Default to PowerShell if no other command specified.
-CMD ["powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

@@ -4,6 +4,7 @@
 # Licensed under the MIT license. See LICENSE.txt in the project root for license information.
 # FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-1903
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
+LABEL maintainer=liveforensics description="Windows Jenkins Slave Base Image"
 
 # Reset the shell.
 SHELL ["cmd", "/S", "/C"]
@@ -26,7 +27,7 @@ ENV JENKINS_URL 'http://doh.com/computer/DockerOne/slave-agent.jnlp'
 ENV SPLUNK_HOST 'where.here.cloudapp.azure.com'
 ENV SPLUNK_PORT '10009'
 
-RUN SETX /M Path "%Path%;C:\Program Files\SplunkUniversalForwarder\bin\;C:\Nuget;c:\python27amd64;C:\BuildTools\MSBuild\Current\Bin;C:\BuildTools\Common7\IDE\Extensions\TestPlatform;C:\BuildTools\Team Tools\Dynamic Code Coverage Tools"
+RUN SETX /M Path "%Path%;C:\Program Files\SplunkUniversalForwarder\bin\;
 
 RUN rmdir /S /Q c:\Persist
 CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
