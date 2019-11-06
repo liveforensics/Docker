@@ -3,7 +3,7 @@
 # Copyright (C) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT license. See LICENSE.txt in the project root for license information.
 # FROM mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-1903
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:1903
 LABEL maintainer=liveforensics description="Windows Jenkins Slave Base Image"
 
 # Reset the shell.
