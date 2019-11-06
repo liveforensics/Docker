@@ -10,7 +10,9 @@ jenkins-slave.exe
 jenkins-slave.exe.config
 jenkins-slave.xml
 slave.jar
-
+id_rsa
+id_rsa.pub
+authorized_keys
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
