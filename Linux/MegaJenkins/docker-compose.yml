@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+    megajenkins:
+        image: liveforensics/megajenkins:1.0.0
+        container_name: megajenkins
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - /home/mark/Docker/volumes/jenkins_home:/var/jenkins_home
+
+        networks:
+            - local-network
+        ports:
+            - "8080:8080"
+            - "50000:50000"          
+networks:
+    local-network:
+        driver: bridge
+        

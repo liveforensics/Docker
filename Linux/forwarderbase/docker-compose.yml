@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    forwarderbase:
+        image: liveforensics/forwarderbase:1.0.0
+        container_name: forwarderbase
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+                    
+networks:
+    local-network:
+        driver: bridge
+        
