@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    terraformslave:
+        image: liveforensics/terraformslave:1.0.0
+        container_name: terraformslave
+        hostname: terraformslave
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+                    
+networks:
+    local-network:
+        driver: bridge
+        

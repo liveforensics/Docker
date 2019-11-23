@@ -1,0 +1,80 @@
+version: '2'
+
+services:
+    portainer:
+        image: portainer/portainer
+        container_name: portainer
+        networks:
+            - local-network
+        ports:
+            - "10001:9000"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+            - /home/mark/docker/volumes/portainer_home:/data
+
+    jenkins:
+        image: jenkins/jenkins:lts
+        container_name: jenkins
+        hostname: jenkins
+        # build:
+        #     context: .
+        #     dockerfile: /jenkins/Dockerfile        
+        networks:
+            - local-network
+        ports:
+            - "10003:8080"
+            - "50001:50000"      
+        volumes:
+            - /home/mark/docker/volumes/jenkins_home:/var/jenkins_home
+            
+    DockerSlave:
+        image: liveforensics/dockerslave:latest
+        container_name: dockerslave
+        hostname: dockerslave
+        networks:
+            - local-network
+        build:
+            context: .
+            dockerfile: /dockerslave/Dockerfile
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+
+    JenkinsSlave:
+        image: liveforensics/jenkinsslave:1.0.0
+        container_name: jenkinsslave
+        hostname: jenkinsslave
+        build:
+            context: .
+            dockerfile: /jenkinsslave/Dockerfile
+        networks:
+            - local-network
+
+    Terraform:
+        image: liveforensics/terraform:12.10
+        container_name: terraform
+        hostname: terraform
+        build:
+            context: .
+            dockerfile: /terraform/Dockerfile
+        networks:
+            - local-network
+
+    Ansible:
+        image: liveforensics/ansible:2.4.2
+        container_name: ansible
+        hostname: ansible
+        build:
+            context: .
+            dockerfile: /ansible/Dockerfile
+        networks:
+            - local-network
+
+                    
+networks:
+    local-network:
+        driver: bridge
+        
+# volumes:
+#     jenkins_home:
+#     portainer_data:
+#     jenkinsreal_home:

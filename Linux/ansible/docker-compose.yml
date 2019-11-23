@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    ansibleslave:
+        image: liveforensics/ansibleslave:1.0.1
+        container_name: ansibleslave
+        hostname: ansibleslave
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+                    
+networks:
+    local-network:
+        driver: bridge
+        
