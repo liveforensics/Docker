@@ -5,7 +5,7 @@ services:
     image: jenkins/jenkins:lts
     container_name: JenkinsMaster
     volumes:
-      - c:\temp\Jenkins_home:/var/jenkins_home
+      - /home/mark/Docker/volumes/jenkins_home:/var/jenkins_home
     # networks:
     #   app_net:
     #     ipv4_address: 192.168.0.109
@@ -13,8 +13,8 @@ services:
       - "8080:8080"
       - "50000:50000"
 
-volumes:
-  jenkins_home:
+# volumes:
+#   jenkins_home:
 
 # networks:
 #   app_net:
