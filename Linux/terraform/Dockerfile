@@ -1,4 +1,6 @@
-FROM liveforensics/linuxstarter:1.0.0
+FROM liveforensics/linuxstarter:1.0.1
+
+ENV PATH /usr/local/go/bin:$PATH
 
 RUN mkdir /home/jenkins/terraform
 
