@@ -2,7 +2,7 @@ version: '2'
 
 services:
     terraformslave:
-        image: liveforensics/terraformslave:1.0.1
+        image: liveforensics/terraformslave:12.17
         container_name: terraformslave
         hostname: terraformslave
         build:
