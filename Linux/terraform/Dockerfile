@@ -14,7 +14,7 @@ RUN yum -y install wget unzip && \
     wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.13.5.linux-amd64.tar.gz && \
     wget https://github.com/vmware/govmomi/releases/download/v0.21.0/govc_linux_amd64.gz && \
-    gunzip -c govc_linux_amd64.gz > /usr/local/bin/ && \    
+    gunzip -c govc_linux_amd64.gz > /usr/local/bin/govc && \    
     rm -rf terraform_0.12.17_linux_amd64.zip && \
     rm -rf go1.13.5.linux-amd64.tar.gz 
     
