@@ -1,10 +1,9 @@
 version: '2'
 
 services:
-    terraformslave:
-        image: liveforensics/terraformslave:12.17
-        container_name: terraformslave
-        hostname: terraformslave
+    forwarderbase:
+        image: liveforensics/forwarderbase:1.0.0
+        container_name: forwarderbase
         build:
             context: .
             dockerfile: Dockerfile
