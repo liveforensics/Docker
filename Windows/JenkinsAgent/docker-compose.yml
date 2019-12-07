@@ -1,0 +1,22 @@
+version: '3'
+
+services:  
+
+  WindowsSlave:
+    image: liveforensics/jenkinsagent:1.0.0
+    container_name: jenkinsagent
+    hostname: jenkinsagent
+    networks:
+      - jenkins-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - \\.\pipe\docker_engine:\\.\pipe\docker_engine
+  
+  
+networks:
+    jenkins-network:
+        driver: nat
+
+
