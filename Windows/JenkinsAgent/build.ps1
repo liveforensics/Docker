@@ -14,6 +14,10 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://cho
 Write-Host "Installing java"
 choco.exe install jdk8 /exclude:32 -y
 
+# Now we'll install Git
+Write-Host "Installing Git"
+choco.exe install -y git
+
 Write-Host "Creating a Jenkins User Account "
 
 # Enable-LocalUser administrator
