@@ -9,8 +9,8 @@ COPY outputs.conf /opt/splunkforwarder/etc/system/local/outputs.conf
 
 
 RUN yum -y install wget unzip && \
-    wget https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_linux_amd64.zip && \
-    unzip terraform_0.12.17_linux_amd64.zip -d /usr/local/bin/ && \
+    wget https://releases.hashicorp.com/terraform/0.12.18/terraform_0.12.18_linux_amd64.zip && \
+    unzip terraform_0.12.18_linux_amd64.zip -d /usr/local/bin/ && \
     wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.13.5.linux-amd64.tar.gz && \
     wget https://github.com/vmware/govmomi/releases/download/v0.21.0/govc_linux_amd64.gz && \
