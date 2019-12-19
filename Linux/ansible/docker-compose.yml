@@ -2,7 +2,7 @@ version: '2'
 
 services:
     ansibleslave:
-        image: liveforensics/ansibleslave:1.0.1
+        image: liveforensics/ansibleslave:2.7.6
         container_name: ansibleslave
         hostname: ansibleslave
         build:
