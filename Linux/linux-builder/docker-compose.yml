@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    linux-builder:
+        image: liveforensics/linux-builder:1.0.0
+        container_name: linux-builder
+        hostname: linux-builder
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+                    
+networks:
+    local-network:
+        driver: bridge
+        
