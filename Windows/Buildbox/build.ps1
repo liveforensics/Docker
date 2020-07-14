@@ -4,6 +4,7 @@ New-Item -ItemType Directory -Path c:\Jenkins
 New-Item -ItemType Directory -Path c:\JenkinsRoot
 
 Write-Host "Installing chocolatey"
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 # Now we'll install the git client using chocolatey

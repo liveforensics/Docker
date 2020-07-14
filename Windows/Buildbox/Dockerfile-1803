@@ -1,9 +1,21 @@
 # escape=`
 
 FROM mcr.microsoft.com/windows/servercore:1803-amd64
+LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
+
+RUN mkdir c:\Persist
+ADD build.ps1 c:\persist\build.ps1
+ADD Wait-Service.ps1 Wait-Service.ps1
+
+RUN powershell.exe -file c:\persist\build.ps1
+
+ADD ./jenkins-agent c:\Jenkins 
+
+ENV JENKINS_SECRET '0011111111111111111111111111111111111111111111111111111111111111c632'
+ENV JENKINS_URL 'http://doh.com/computer/DockerOne/slave-agent.jnlp'
 
 # Download the Build Tools bootstrapper.
 ADD https://aka.ms/vs/16/release/vs_buildtools.exe C:\TEMP\vs_buildtools.exe
@@ -17,5 +29,6 @@ RUN C:\TEMP\vs_buildtools.exe --quiet --wait --norestart --nocache `
  || IF "%ERRORLEVEL%"=="3010" EXIT 0
 
 # Define the entry point for the docker container.
-# This entry point starts the developer command prompt and launches the PowerShell shell.
-ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+RUN rmdir /S /Q c:\Persist
+# ENTRYPOINT ["C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-file", "c:\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
