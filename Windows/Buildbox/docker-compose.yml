@@ -5,8 +5,8 @@ services:
     image: liveforensics/buildbox:1803
     container_name: buildbox1803       
     build:
-      context: ./1803
-      dockerfile: Dockerfile        
+      context: .
+      dockerfile: Dockerfile-1803
     deploy:
         resources:
           limits:
@@ -20,8 +20,8 @@ services:
     image: liveforensics/buildbox:1809
     container_name: buildbox1809    
     build:
-      context: ./1809
-      dockerfile: Dockerfile        
+      context: .
+      dockerfile: Dockerfile-1809
     deploy:
         resources:
           limits:
@@ -35,8 +35,8 @@ services:
     image: liveforensics/buildbox:1903
     container_name: buildbox1903   
     build:
-      context: ./1903
-      dockerfile: Dockerfile        
+      context: .
+      dockerfile: Dockerfile-1903
     deploy:
         resources:
           limits:
@@ -50,8 +50,8 @@ services:
     image: liveforensics/buildbox:1909
     container_name: buildbox1909
     build:
-      context: ./1909
-      dockerfile: Dockerfile        
+      context: .
+      dockerfile: Dockerfile-1909
     deploy:
         resources:
           limits:
@@ -65,8 +65,8 @@ services:
     image: liveforensics/buildbox:2004
     container_name: buildbox2004
     build:
-      context: ./2004
-      dockerfile: Dockerfile        
+      context: .
+      dockerfile: Dockerfile-2004
     deploy:
         resources:
           limits:
