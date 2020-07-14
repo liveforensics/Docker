@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+                                    
+  buildbox2004:
+    image: liveforensics/buildbox:2004
+    container_name: buildbox2004
+    build:
+      context: .\2004
+      dockerfile: Dockerfile
+    

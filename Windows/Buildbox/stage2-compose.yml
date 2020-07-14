@@ -62,7 +62,7 @@ services:
             memory: 2G
                                     
   buildbox2004:
-    image: liveforensics/buildbox:2004
+    image: liveforensics/buildbox:2004-jenkins
     container_name: buildbox2004
     build:
       context: .
