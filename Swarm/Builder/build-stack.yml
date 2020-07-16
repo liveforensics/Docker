@@ -8,6 +8,8 @@ services:
     ports:
         - "8080:8080"
         - "50000:50000"
+    volumes:
+      - /home/sysadmin/docker-shared/user-volumes/orchestrator/jenkins_home:/var/jenkins_home
     deploy:
         mode: replicated
         replicas: 1
@@ -15,9 +17,12 @@ services:
           constraints: [node.role == manager]
 
   buildbox:
-    image: liveforensics/buildbox:2004
+    image: liveforensics/buildbox:2004-jenkins
     networks:
       - testlabnet
+    environment:
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20One/slave-agent.jnlp
+      - JENKINS_SECRET=07f70e7beb9bcd83b4bca09bdbe1a6322441cab90483c534511cf0c41c3e7034
     deploy:
       mode: replicated
       replicas: 1
@@ -31,7 +36,23 @@ services:
           cpus: '0.25'
           memory: 2G
 
+  nexus:
+    image: sonatype/nexus3
+    networks:
+      - testlabnet
+      ports:
+        - "8081:8081"
+      volumes:
+        - home/sysadmin/docker-shared/user-volumes/nexus3:/nexus-data
+      deploy:
+        mode: replicated
+        replicas: 1
+        placement:
+          constraints: [node.platform.os == linux]
+
 networks:
   testlabnet:
     driver: overlay
     attachable: true
+
+#  
