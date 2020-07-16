@@ -1,7 +1,13 @@
 version: '3.0'
 
 services:
-                                    
+  buildbox1909:
+    image: liveforensics/buildbox:1909
+    container_name: buildbox1909
+    build:
+      context: .\1909
+      dockerfile: Dockerfile
+  
   buildbox2004:
     image: liveforensics/buildbox:2004
     container_name: buildbox2004
