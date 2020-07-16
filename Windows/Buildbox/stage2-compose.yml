@@ -1,53 +1,53 @@
 version: '3.0'
 
 services:
-  buildbox1803:
-    image: liveforensics/buildbox:1803
-    container_name: buildbox1803       
-    build:
-      context: .
-      dockerfile: Dockerfile-1803
-    deploy:
-        resources:
-          limits:
-            cpus: '0.50'
-            memory: 2G
-          reservations:
-            cpus: '0.25'
-            memory: 2G
+  # buildbox1803:
+  #   image: liveforensics/buildbox:1803
+  #   container_name: buildbox1803       
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-1803
+  #   deploy:
+  #       resources:
+  #         limits:
+  #           cpus: '0.50'
+  #           memory: 2G
+  #         reservations:
+  #           cpus: '0.25'
+  #           memory: 2G
 
-  buildbox1809:
-    image: liveforensics/buildbox:1809
-    container_name: buildbox1809    
-    build:
-      context: .
-      dockerfile: Dockerfile-1809
-    deploy:
-        resources:
-          limits:
-            cpus: '0.50'
-            memory: 2G
-          reservations:
-            cpus: '0.25'
-            memory: 2G
+  # buildbox1809:
+  #   image: liveforensics/buildbox:1809
+  #   container_name: buildbox1809    
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-1809
+  #   deploy:
+  #       resources:
+  #         limits:
+  #           cpus: '0.50'
+  #           memory: 2G
+  #         reservations:
+  #           cpus: '0.25'
+  #           memory: 2G
 
-  buildbox1903:
-    image: liveforensics/buildbox:1903
-    container_name: buildbox1903   
-    build:
-      context: .
-      dockerfile: Dockerfile-1903
-    deploy:
-        resources:
-          limits:
-            cpus: '0.50'
-            memory: 2G
-          reservations:
-            cpus: '0.25'
-            memory: 2G
+  # buildbox1903:
+  #   image: liveforensics/buildbox:1903
+  #   container_name: buildbox1903   
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-1903
+  #   deploy:
+  #       resources:
+  #         limits:
+  #           cpus: '0.50'
+  #           memory: 2G
+  #         reservations:
+  #           cpus: '0.25'
+  #           memory: 2G
               
   buildbox1909:
-    image: liveforensics/buildbox:1909
+    image: liveforensics/buildbox:1909-jenkins
     container_name: buildbox1909
     build:
       context: .
