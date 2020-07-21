@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+    linux-builder:
+        image: liveforensics/linux-builder:1.0.0-jenkins
+        container_name: linux-builder
+        hostname: linux-builder
+        build:
+            context: .
+            dockerfile: Dockerfile
