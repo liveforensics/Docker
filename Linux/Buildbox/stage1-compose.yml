@@ -1,0 +1,15 @@
+version: '3.0'
+
+services:
+    buildboxgcc:
+        image: liveforensics/buildboxgcc:1.0.0
+        container_name: buildboxgcc
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "22:22"
+        volumes:
+            - C:\Code\Simple-TCP-Server-Client:/usr/src/code
+
+            

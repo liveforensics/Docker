@@ -1,0 +1,15 @@
+version: '3.0'
+
+services:
+    buildboxgccjenkins:
+        image: liveforensics/buildboxgcc:1.0.0-jenkins
+        container_name: buildboxgcc-jenkins
+        build:
+            context: .
+            dockerfile: Dockerfile-Jenkins
+        ports:
+            - "22:22"
+        volumes:
+            - C:\Code\Simple-TCP-Server-Client:/usr/src/code
+
+            

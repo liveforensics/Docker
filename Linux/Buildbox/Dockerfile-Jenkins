@@ -1,0 +1,16 @@
+# escape=`
+
+FROM liveforensics/buildboxgcc:1.0.0
+LABEL maintainer=liveforensics description="Linux Build Jenkins enabled Image"
+
+# Add user jenkins to the image
+RUN adduser jenkins && `
+# Set password for the jenkins user (you may want to alter this).
+echo "jenkins:jenkins" | chpasswd && `
+mkdir /home/jenkins/.m2 && `
+mkdir /home/jenkins/.ssh 
+
+ADD ./id_rsa.pub /home/jenkins/.ssh/authorized_keys
+
+RUN ssh-keygen -t rsa -f /home/jenkins/.ssh/id_rsa -N ''
+
