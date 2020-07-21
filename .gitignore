@@ -13,6 +13,8 @@ jenkins-slave.xml
 slave.jar
 id_rsa
 id_rsa.pub
+!Linux/Buildbox/id_rsa*
+
 authorized_keys
 
 # User-specific files (MonoDevelop/Xamarin Studio)
