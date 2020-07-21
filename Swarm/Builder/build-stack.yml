@@ -36,6 +36,18 @@ services:
           cpus: '0.25'
           memory: 2G
 
+  buildbox2:
+    image: liveforensics/buildboxgcc:1.0.0-jenkins
+    networks:
+      - testlabnet
+    ports:
+      - "22:22" 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == linux]
+
   nexus:
     image: sonatype/nexus3
     networks:
