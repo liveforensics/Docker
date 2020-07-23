@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   orchestrator:
-    image: jenkins/jenkins:lts
+    image: jenkins/jenkins:2.235.2-lts-centos7
     networks:
       - testlabnet
     ports:
