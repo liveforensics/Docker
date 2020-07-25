@@ -8,7 +8,10 @@ RUN adduser jenkins && `
 # Set password for the jenkins user (you may want to alter this).
 echo "jenkins:jenkins" | chpasswd && `
 mkdir /home/jenkins/.m2 && `
-mkdir /home/jenkins/.ssh 
+mkdir /home/jenkins/.ssh && `
+mkdir /jenkinsroot && `
+dnf -y install java-11-openjdk-headless && `
+dnf clean all
 
 ADD ./id_rsa.pub /home/jenkins/.ssh/authorized_keys
 
