@@ -7,7 +7,7 @@ LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 SHELL ["cmd", "/S", "/C"]
 
 # Copy our Install script.
-COPY Install.cmd C:\TEMP\
+COPY install.cmd C:\TEMP\
 
 # Download collect.exe in case of an install failure.
 ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
