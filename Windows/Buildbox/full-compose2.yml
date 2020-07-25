@@ -1,0 +1,18 @@
+version: '3.0'
+
+services:
+  buildbox2004full:
+    image: liveforensics/buildbox:2004-full-jenkins
+    container_name: buildbox2004full
+    build:
+      context: .
+      dockerfile: Dockerfile-2004-full
+    deploy:
+        resources:
+          limits:
+            cpus: '0.50'
+            memory: 2G
+          reservations:
+            cpus: '0.25'
+            memory: 2G
+                                                          
