@@ -2,7 +2,8 @@ version: '3.2'
 
 services:
   orchestrator:
-    image: jenkins/jenkins:lts
+    # image: jenkins/jenkins:2.235.2-lts-centos7
+    image:jenkins/jenkins:latest
     networks:
       - testlabnet
     ports:
@@ -10,6 +11,7 @@ services:
         - "50000:50000"
     volumes:
       - /home/sysadmin/docker-shared/user-volumes/orchestrator/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
     deploy:
         mode: replicated
         replicas: 1
@@ -36,6 +38,26 @@ services:
           cpus: '0.25'
           memory: 2G
 
+  buildbox3:
+    image: liveforensics/buildbox:2004-full-jenkins
+    networks:
+      - testlabnet
+    environment:
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20dotnet/slave-agent.jnlp
+      - JENKINS_SECRET=a295b8a618dc7b5b525395ffeedea6a58b79cb3ae5e5382c2b6bed2f6bf6bef3
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 2G
+        
   buildbox2:
     image: liveforensics/buildboxgcc:1.0.0-jenkins
     networks:

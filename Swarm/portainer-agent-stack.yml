@@ -9,8 +9,7 @@ services:
     networks:
       - agent_network
     deploy:
-      mode: replicated
-      replicas: 1
+      mode: global
       placement:
         constraints: [node.platform.os == linux]
 
