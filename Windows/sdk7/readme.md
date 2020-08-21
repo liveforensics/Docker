@@ -1,3 +1,5 @@
+# PHASE 1
+
 do a docker-compose build 
 to get the liveforensics/buildbox:sdk7.1-base image
 
@@ -33,4 +35,11 @@ now exit the container and commit it as an image file like this
 
 docker commit sdk71 liveforensics/buildbox:sdk7.1
 
+# PHASE 2
+
+now we're going to add the jenkins stuff
+
+docker-compose -f docker-compose-2.yml build
+
+this creates the liveforensics/buildbox:sdk7.1-jenkins image
 
