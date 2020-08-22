@@ -18,6 +18,10 @@ OpenSSH/
 
 authorized_keys
 
+powerpc-eabi/
+
+
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
