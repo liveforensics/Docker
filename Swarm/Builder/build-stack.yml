@@ -77,8 +77,8 @@ services:
     ports:
       - "20022:22" 
     environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20dotnet/slave-agent.jnlp
-      - JENKINS_SECRET=a295b8a618dc22222222222222222222eedea6a58b79cb3ae5e5382c2b6bed2f6bf6bef3
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/sdk7/slave-agent.jnlp
+      - JENKINS_SECRET=2858399af1e04a1ebe792aa60f2c5dce36e67a2f723a944fce95a17725d55c9e
     deploy:
       mode: replicated
       replicas: 1
@@ -95,7 +95,8 @@ services:
   nexus:
     image: sonatype/nexus3
     networks:
-      - testlabnet
+      hostnetwork:
+        ipv4_address: 10.0.10.123
     ports:
       - "8081:8081"
     volumes:
@@ -110,5 +111,8 @@ networks:
   testlabnet:
     driver: overlay
     attachable: true
+  hostnetwork:
+    external:
+      name: test-overlay
 
 #  
