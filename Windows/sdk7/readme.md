@@ -58,7 +58,8 @@ docker rm sdk71
 now we're going to make a runnable container
 
 ```
-docker-compose -f .\docker-compose-2.yml build
+docker-compose -f .\docker-compose-1909-2.yml build
+docker-compose -f .\docker-compose-2004-2.yml build
 ```
 
 which will give you **liveforensics/buildbox:xxxx-sdk7.1**
