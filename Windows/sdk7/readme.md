@@ -60,7 +60,7 @@ now we're going to make a runnable container
 docker-compose -f .\docker-compose-2.yml build
 ```
 
-which will give you liveforensics/buildbox:xxxx-sdk7.1
+which will give you **liveforensics/buildbox:xxxx-sdk7.1**
 
 you can run the image as a standalone build container like this..
 
@@ -78,7 +78,7 @@ now we're going to add the jenkins stuff
 docker-compose -f docker-compose-3.yml build
 ```
 
-this creates the liveforensics/buildbox:xxxx-sdk7.1-jenkins image
+this creates the **liveforensics/buildbox:xxxx-sdk7.1-jenkins** image
 
 * docker rmi liveforensics/buildbox:1909-sdk7.1-base liveforensics/buildbox:1909-sdk7.1-intermediate
 * docker rmi liveforensics/buildbox:2004-sdk7.1-base liveforensics/buildbox:2004-sdk7.1-intermediate
