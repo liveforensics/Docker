@@ -1,0 +1,13 @@
+# escape=`
+
+FROM liveforensics/buildbox:1909-sdk7.1-base
+LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
+
+# Restore the default Windows shell for correct batch processing.
+SHELL ["cmd", "/S", "/C"]
+
+
+
+RUN rmdir /S /Q c:\Persist
+
+ENTRYPOINT ["C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.cmd", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
