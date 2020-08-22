@@ -23,7 +23,8 @@ this will set the registry keys for an older version of the dotnet framework, wh
 change this to whereever you've mapped the sdk setup folder and run..
 
 ```
-C:\sdk\sdk\Setup\SDKSetup.exe /quiet /norestart
+cd C:\sdk\sdk\Setup\
+.\SDKSetup.exe /quiet /norestart
 ```
 
 give it a good few minutes to complete.
