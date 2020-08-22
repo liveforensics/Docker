@@ -1,4 +1,4 @@
-# PHASE 1
+## PHASE 1
 
 start with a..
 
@@ -15,9 +15,9 @@ then
 where i've previously extracted the sdk 7.1 iso folders into c:\temp\dockerfolder
 
 inside the running container..
-
+```
 C:\persist\takeownership.ps1
-
+```
 this will set the registry keys for an older version of the dotnet framework, which fools the sdk installer into working!
 
 change this to whereever you've mapped the sdk setup folder and run..
@@ -34,7 +34,9 @@ change this to whereever you've mapped the sdk setup folder and run..
 
 if you want to make the image a bit smaller..
 
+```
 Remove-Item -Recurse -Force 'C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\'
+```
 
 now exit the container and commit it as an image file like this
 
@@ -43,12 +45,16 @@ now exit the container and commit it as an image file like this
 
 delete the container
 
+```
 docker rm sdk71
+```
 
-# PHASE 2
+## PHASE 2
 now we're going to make a runnable container
 
+```
 docker-compose -f .\docker-compose-2.yml build
+```
 
 which will give you liveforensics/buildbox:xxxx-sdk7.1
 
@@ -60,11 +66,13 @@ you can run the image as a standalone build container like this..
 inside the container run setenv.cmd /? to see the options
 
 
-# PHASE 3
+## PHASE 3
 
 now we're going to add the jenkins stuff
 
+```
 docker-compose -f docker-compose-3.yml build
+```
 
 this creates the liveforensics/buildbox:xxxx-sdk7.1-jenkins image
 
