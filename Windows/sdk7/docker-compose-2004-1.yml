@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  buildboxsdk71:
+    image: liveforensics/buildbox:2004-sdk7.1-intermediate
+    container_name: buildboxsdk71
+    build:
+      context: .
+      dockerfile: Dockerfile-2004-1

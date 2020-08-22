@@ -1,6 +1,6 @@
 # escape=`
 
-FROM liveforensics/buildbox:sdk7.1
+FROM liveforensics/buildbox:2004-sdk7.1
 LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 
 # Restore the default Windows shell for correct batch processing.

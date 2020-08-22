@@ -1,11 +1,16 @@
 # PHASE 1
 
-do a docker-compose -f .\docker-compose-1.yml build
-to get the liveforensics/buildbox:sdk7.1-intermediate image
+start with a..
+
+* docker-compose -f .\docker-compose-1909-1.yml build
+* docker-compose -f .\docker-compose-2004-1.yml build
+
+to get the liveforensics/buildbox:xxxx-sdk7.1-intermediate image
 
 then 
 
-docker run -it --name sdk71 -v c:\temp\dockerfolder:c:\sdk liveforensics/buildbox:sdk7.1-intermediate powershell
+* docker run -it --name sdk71 -v c:\temp\dockerfolder:c:\sdk liveforensics/buildbox:1909-sdk7.1-intermediate powershell
+* docker run -it --name sdk71 -v c:\temp\dockerfolder:c:\sdk liveforensics/buildbox:2004-sdk7.1-intermediate powershell
 
 where i've previously extracted the sdk 7.1 iso folders into c:\temp\dockerfolder
 
@@ -33,7 +38,8 @@ Remove-Item -Recurse -Force 'C:\Program Files\Microsoft SDKs\Windows\v7.1\Sample
 
 now exit the container and commit it as an image file like this
 
-docker commit sdk71 liveforensics/buildbox:sdk7.1-base
+* docker commit sdk71 liveforensics/buildbox:1909-sdk7.1-base
+* docker commit sdk71 liveforensics/buildbox:2004-sdk7.1-base
 
 delete the container
 
@@ -44,11 +50,13 @@ now we're going to make a runnable container
 
 docker-compose -f .\docker-compose-2.yml build
 
-which will give you liveforensics/buildbox:sdk7.1
+which will give you liveforensics/buildbox:xxxx-sdk7.1
 
 you can run the image as a standalone build container like this..
 
-docker run -it --rm --name sdk71 liveforensics/buildbox:sdk7.1
+* docker run -it --rm --name sdk71 liveforensics/buildbox:1909-sdk7.1
+* docker run -it --rm --name sdk71 liveforensics/buildbox:2004-sdk7.1
+
 inside the container run setenv.cmd /? to see the options
 
 
@@ -58,7 +66,7 @@ now we're going to add the jenkins stuff
 
 docker-compose -f docker-compose-3.yml build
 
-this creates the liveforensics/buildbox:sdk7.1-jenkins image
+this creates the liveforensics/buildbox:xxxx-sdk7.1-jenkins image
 
-docker rmi liveforensics/buildbox:sdk7.1-base liveforensics/buildbox:sdk7.1-intermediate
-
+* docker rmi liveforensics/buildbox:1909-sdk7.1-base liveforensics/buildbox:1909-sdk7.1-intermediate
+* docker rmi liveforensics/buildbox:2004-sdk7.1-base liveforensics/buildbox:2004-sdk7.1-intermediate
