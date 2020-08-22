@@ -5,7 +5,7 @@ start with a..
 * docker-compose -f .\docker-compose-1909-1.yml build
 * docker-compose -f .\docker-compose-2004-1.yml build
 
-to get the liveforensics/buildbox:xxxx-sdk7.1-intermediate image
+to get the **liveforensics/buildbox:xxxx-sdk7.1-intermediate** image
 
 then 
 
