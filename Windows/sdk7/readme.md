@@ -57,10 +57,9 @@ docker rm sdk71
 ## PHASE 2
 now we're going to make a runnable container
 
-```
-docker-compose -f .\docker-compose-1909-2.yml build
-docker-compose -f .\docker-compose-2004-2.yml build
-```
+* docker-compose -f .\docker-compose-1909-2.yml build
+* docker-compose -f .\docker-compose-2004-2.yml build
+
 
 which will give you **liveforensics/buildbox:xxxx-sdk7.1**
 
@@ -76,9 +75,9 @@ inside the container run setenv.cmd /? to see the options
 
 now we're going to add the jenkins stuff
 
-```
-docker-compose -f docker-compose-3.yml build
-```
+* docker-compose -f docker-compose-1909-3.yml build
+* docker-compose -f docker-compose-2004-3.yml build
+
 
 this creates the **liveforensics/buildbox:xxxx-sdk7.1-jenkins** image
 
