@@ -22,15 +22,19 @@ this will set the registry keys for an older version of the dotnet framework, wh
 
 change this to whereever you've mapped the sdk setup folder and run..
 
- C:\sdk\sdk\Setup\SDKSetup.exe /quiet /norestart
+```
+C:\sdk\sdk\Setup\SDKSetup.exe /quiet /norestart
+```
 
- give it a good few minutes to complete.
+give it a good few minutes to complete.
 
- Now you should have sdk 7.1 installed. Go back into c:\persist and run..
+Now you should have sdk 7.1 installed. Go back into c:\persist and run..
 
- C:\persist\andback.ps1
+```
+C:\persist\andback.ps1
+```
 
- to reset the registry keys to the current version of the dotnet framework.
+to reset the registry keys to the current version of the dotnet framework.
 
 if you want to make the image a bit smaller..
 
