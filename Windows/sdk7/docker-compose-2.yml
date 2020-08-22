@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   buildboxsdk71:
-    image: liveforensics/buildbox:sdk7.1-jenkins
+    image: liveforensics/buildbox:sdk7.1
     container_name: buildboxsdk71
     build:
       context: .

@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+  buildboxsdk71:
+    image: liveforensics/buildbox:sdk7.1-jenkins
+    container_name: buildboxsdk71
+    build:
+      context: .
+      dockerfile: Dockerfile-3
+    ports:
+      - "22:22"

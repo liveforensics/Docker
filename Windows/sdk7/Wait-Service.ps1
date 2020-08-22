@@ -93,7 +93,7 @@ function Wait-Service()
 
         $ServiceProcess = New-Object System.ServiceProcess.ServiceController($ServiceName)
 
-        if ($ServiceProcess -eq $null)
+        if ($null -eq $ServiceProcess)
         {
             throw "The specified service does not exist or can not be found."
         }

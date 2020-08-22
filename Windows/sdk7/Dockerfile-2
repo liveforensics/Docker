@@ -1,22 +1,13 @@
 # escape=`
 
-FROM liveforensics/buildbox:sdk7.1
+FROM liveforensics/buildbox:sdk7.1-base
 LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
 
-# RUN mkdir c:\Persist
-ADD build.ps1 c:\persist\build.ps1
-ADD Wait-Service.ps1 Wait-Service.ps1
 
-RUN powershell.exe -file c:\persist\build.ps1
-
-ADD ./jenkins-agent c:\Jenkins 
-
-ENV JENKINS_SECRET '0011111111111111111111111111111111111111111111111111111111111111c632'
-ENV JENKINS_URL 'http://doh.com/computer/DockerOne/slave-agent.jnlp'
 
 RUN rmdir /S /Q c:\Persist
-# Define the entry point for the docker container.
-CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
+
+ENTRYPOINT ["C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.cmd", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

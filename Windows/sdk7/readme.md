@@ -1,45 +1,64 @@
 # PHASE 1
 
-do a docker-compose build 
-to get the liveforensics/buildbox:sdk7.1-base image
+do a docker-compose -f .\docker-compose-1.yml build
+to get the liveforensics/buildbox:sdk7.1-intermediate image
 
 then 
 
-docker run -it --name sdk71 -v c:\temp\dockerfolder:c:\sdk liveforensics/buildbox:sdk7.1-base powershell
+docker run -it --name sdk71 -v c:\temp\dockerfolder:c:\sdk liveforensics/buildbox:sdk7.1-intermediate powershell
 
 where i've previously extracted the sdk 7.1 iso folders into c:\temp\dockerfolder
 
-inside the running container, go to c:\persist and run
+inside the running container..
 
-.\permissions.ps1
+C:\persist\takeownership.ps1
 
 this will set the registry keys for an older version of the dotnet framework, which fools the sdk installer into working!
 
-then change to c:\sdk\sdk\setup - or whereever you've mapped the sdk setup folder and run
+change this to whereever you've mapped the sdk setup folder and run..
 
- .\SDKSetup.exe /quiet /norestart
+ C:\sdk\sdk\Setup\SDKSetup.exe /quiet /norestart
 
  give it a good few minutes to complete.
 
- Now you should have sdk 7.1 installed. Go back into c:\persist and run
+ Now you should have sdk 7.1 installed. Go back into c:\persist and run..
 
- .\andback.ps1
+ C:\persist\andback.ps1
 
  to reset the registry keys to the current version of the dotnet framework.
 
-if you want to make the image a bit smaller, go into C:\Program Files\Microsoft SDKs\Windows\v7.1 and run
+if you want to make the image a bit smaller..
 
-remove-item -Recurse -Force .\Samples\
+Remove-Item -Recurse -Force 'C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\'
 
 now exit the container and commit it as an image file like this
 
-docker commit sdk71 liveforensics/buildbox:sdk7.1
+docker commit sdk71 liveforensics/buildbox:sdk7.1-base
+
+delete the container
+
+docker rm sdk71
 
 # PHASE 2
+now we're going to make a runnable container
+
+docker-compose -f .\docker-compose-2.yml build
+
+which will give you liveforensics/buildbox:sdk7.1
+
+you can run the image as a standalone build container like this..
+
+docker run -it --rm --name sdk71 liveforensics/buildbox:sdk7.1
+inside the container run setenv.cmd /? to see the options
+
+
+# PHASE 3
 
 now we're going to add the jenkins stuff
 
-docker-compose -f docker-compose-2.yml build
+docker-compose -f docker-compose-3.yml build
 
 this creates the liveforensics/buildbox:sdk7.1-jenkins image
+
+docker rmi liveforensics/buildbox:sdk7.1-base liveforensics/buildbox:sdk7.1-intermediate
 
