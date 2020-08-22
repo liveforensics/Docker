@@ -25,6 +25,8 @@ change this to whereever you've mapped the sdk setup folder and run..
 ```
 cd C:\sdk\sdk\Setup\
 .\SDKSetup.exe /quiet /norestart
+
+get-process | ? Name -like 'msiexec'
 ```
 
 give it a good few minutes to complete.
