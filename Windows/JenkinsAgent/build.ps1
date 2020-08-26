@@ -1,22 +1,21 @@
-# versions
-
-Write-Host "#################################################### Creating Slave Base #############################################################################"
+Write-Host "#################################################### Creating Build Base #############################################################################"
 Write-Host "Creating new folders.."
 New-Item -ItemType Directory -Path c:\Jenkins
 New-Item -ItemType Directory -Path c:\JenkinsRoot
-New-Item -ItemType Directory -Path c:\Temp
 
 Write-Host "Installing chocolatey"
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-
-# Now we'll install Java
-Write-Host "Installing java"
-choco.exe install jdk8 /exclude:32 -y
-
-# Now we'll install Git
-Write-Host "Installing Git"
+# Now we'll install the git client using chocolatey
+Write-Host "Installing git"
 choco.exe install -y git
+
+Write-Host "Installing Python"
+choco.exe install -y python
+# Now we'll install Java
+Write-Host "Installing git"
+choco.exe install jdk8 /exclude:32 -y
 
 Write-Host "Creating a Jenkins User Account "
 
@@ -28,9 +27,5 @@ Add-LocalGroupMember -Group 'Administrators' -Member 'Jenkins'
 net user 'Jenkins' /passwordreq:yes
 
 Get-LocalUser | Where-Object {$_.Name -eq 'Jenkins'} | Select-Object *
-
-# now install docker
-Write-Host "Installing docker cli"
-choco install docker -y
 
 Write-Host "######################################################### Finished! ##################################################################################"

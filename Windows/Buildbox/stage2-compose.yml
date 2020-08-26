@@ -61,18 +61,18 @@ services:
             cpus: '0.25'
             memory: 2G
                                     
-  # buildbox2004:
-  #   image: liveforensics/buildbox:2004-jenkins
-  #   container_name: buildbox2004
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile-2004
-  #   deploy:
-  #       resources:
-  #         limits:
-  #           cpus: '0.50'
-  #           memory: 2G
-  #         reservations:
-  #           cpus: '0.25'
-  #           memory: 2G
+  buildbox2004:
+    image: liveforensics/buildbox:2004-jenkins
+    container_name: buildbox2004
+    build:
+      context: .
+      dockerfile: Dockerfile-2004
+    deploy:
+        resources:
+          limits:
+            cpus: '0.50'
+            memory: 2G
+          reservations:
+            cpus: '0.25'
+            memory: 2G
                                                           
