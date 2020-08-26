@@ -85,3 +85,11 @@ this creates the **liveforensics/buildbox:xxxx-sdk7.1-jenkins** image
 
 * docker rmi liveforensics/buildbox:1909-sdk7.1-base liveforensics/buildbox:1909-sdk7.1-intermediate
 * docker rmi liveforensics/buildbox:2004-sdk7.1-base liveforensics/buildbox:2004-sdk7.1-intermediate
+
+and now push the results to docker hub
+
+* docker push liveforensics/buildbox:1909-sdk7.1
+* docker push liveforensics/buildbox:1909-sdk7.1-jenkins
+
+* docker push liveforensics/buildbox:2004-sdk7.1
+* docker push liveforensics/buildbox:2004-sdk7.1-jenkins

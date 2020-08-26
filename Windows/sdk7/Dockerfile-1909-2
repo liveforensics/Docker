@@ -10,4 +10,5 @@ SHELL ["cmd", "/S", "/C"]
 
 RUN rmdir /S /Q c:\Persist
 
-ENTRYPOINT ["C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.cmd", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+ENTRYPOINT ["C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.cmd", "&&", "cmd.exe"]
+# ENTRYPOINT ["C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.cmd", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
