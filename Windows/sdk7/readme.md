@@ -47,7 +47,8 @@ Remove-Item -Recurse -Force 'C:\Program Files\Microsoft SDKs\Windows\v7.1\Sample
 
 now exit the container and commit it as an image file like this
 
-c
+* docker commit sdk71 liveforensics/buildbox:1909-sdk7.1-base
+* docker commit sdk71 liveforensics/buildbox:2004-sdk7.1-base
 
 delete the container
 
