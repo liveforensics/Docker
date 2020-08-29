@@ -93,7 +93,7 @@ function Wait-Service()
 
         $ServiceProcess = New-Object System.ServiceProcess.ServiceController($ServiceName)
 
-        if ($ServiceProcess -eq $null)
+        if ($null -eq $ServiceProcess)
         {
             throw "The specified service does not exist or can not be found."
         }
@@ -156,16 +156,6 @@ if(Test-Path c:\persist)
     {
         Write-Host "Overwriting slave.jar with the one in Persist"
         Copy-Item c:\persist\slave.jar -Destination c:\Jenkins\slave.jar -Force
-    }
-    if(Test-Path c:\persist\agent.jar)
-    {
-        Write-Host "Overwriting agent.jar with the one in Persist"
-        Copy-Item c:\persist\agent.jar -Destination c:\Jenkins\agent.jar -Force
-    }
-    if(Test-Path c:\persist\jenkins-slave-xml.bak)
-    {
-        Write-Host "Overwriting jenkins-slave-xml.bak with the one in Persist"
-        Copy-Item c:\persist\jenkins-slave-xml.bak -Destination c:\Jenkins\jenkins-slave-xml.bak -Force
     }
     if(Test-Path c:\persist\jenkins-slave.exe)
     {

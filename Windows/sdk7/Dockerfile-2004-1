@@ -1,0 +1,15 @@
+# escape=`
+
+FROM mcr.microsoft.com/dotnet/framework/runtime:3.5-windowsservercore-2004
+
+RUN mkdir c:\persist
+RUN whoami
+
+ADD takeownership.ps1 c:\persist\takeownership.ps1
+ADD andback.ps1 c:\persist\andback.ps1
+ADD openssh.ps1 c:\persist\openssh.ps1
+ADD enablesshd.ps1 c:\persist\enablesshd.ps1
+
+RUN powershell.exe -file c:\persist\openssh.ps1
+ADD ./OpenSSH C:\windows\system32\openssh\ 
+RUN powershell.exe -file c:\persist\enablesshd.ps1

@@ -11,11 +11,18 @@ jenkins-slave.exe
 jenkins-slave.exe.config
 jenkins-slave.xml
 slave.jar
+agent.jar
+*.jnlp
 id_rsa
 id_rsa.pub
 !Linux/Buildbox/id_rsa*
+OpenSSH/
 
 authorized_keys
+
+powerpc-eabi/
+
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -1,7 +1,7 @@
 # escape=`
 
-FROM liveforensics/buildbox:1909
-LABEL maintainer=liveforensics description="Windows Jenkins Build Slave"
+FROM mcr.microsoft.com/windows/servercore:2004-amd64
+LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
@@ -9,6 +9,12 @@ SHELL ["cmd", "/S", "/C"]
 RUN mkdir c:\Persist
 ADD build.ps1 c:\persist\build.ps1
 ADD Wait-Service.ps1 Wait-Service.ps1
+ADD openssh.ps1 c:\persist\openssh.ps1
+ADD enablesshd.ps1 c:\persist\enablesshd.ps1
+
+RUN powershell.exe -file c:\persist\openssh.ps1
+ADD ./OpenSSH C:\windows\system32\openssh\ 
+RUN powershell.exe -file c:\persist\enablesshd.ps1
 
 RUN powershell.exe -file c:\persist\build.ps1
 

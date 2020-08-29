@@ -3,17 +3,26 @@ version: '3'
 services:  
 
   WindowsSlave:
-    image: liveforensics/jenkinsagent:1.0.1
+    image: liveforensics/jenkinsagent:1909
     container_name: jenkinsagent
     hostname: jenkinsagent
     networks:
       - jenkins-network
     build:
       context: .
-      dockerfile: Dockerfile
-    volumes:
-    - \\.\pipe\docker_engine:\\.\pipe\docker_engine
+      dockerfile: Dockerfile-1909
+    
   
+  WindowsSlave2:
+    image: liveforensics/jenkinsagent:2004
+    container_name: jenkinsagent2
+    hostname: jenkinsagent2
+    networks:
+      - jenkins-network
+    build:
+      context: .
+      dockerfile: Dockerfile-2004
+    
   
 networks:
     jenkins-network:

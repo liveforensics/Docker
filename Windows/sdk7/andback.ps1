@@ -1,0 +1,2 @@
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\NET Framework Setup\NDP\v4\Client' -Name "Version" -Value "4.8.04084"
+Set-ItemProperty -Path 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\NET Framework Setup\NDP\v4\Full' -Name "Version" -Value "4.8.04084"

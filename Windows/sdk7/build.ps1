@@ -11,8 +11,8 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://cho
 Write-Host "Installing git"
 choco.exe install -y git
 
-Write-Host "Installing Python"
-choco.exe install -y python
+Write-Host "Installing Python 2"
+choco.exe install -y python2
 # Now we'll install Java
 Write-Host "Installing git"
 choco.exe install jdk8 /exclude:32 -y

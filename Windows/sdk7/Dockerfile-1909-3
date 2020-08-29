@@ -1,7 +1,7 @@
 # escape=`
 
-FROM liveforensics/buildbox:1909
-LABEL maintainer=liveforensics description="Windows Jenkins Build Slave"
+FROM liveforensics/buildbox:1909-sdk7.1
+LABEL maintainer=liveforensics description="Windows Jenkins Build Base Image"
 
 # Restore the default Windows shell for correct batch processing.
 SHELL ["cmd", "/S", "/C"]
@@ -19,4 +19,5 @@ ENV JENKINS_URL 'http://doh.com/computer/DockerOne/slave-agent.jnlp'
 
 RUN rmdir /S /Q c:\Persist
 # Define the entry point for the docker container.
+# CMD powershell.exe -file c:\Wait-Service.ps1 -ServiceName EventLog -AllowServiceRestart
 ENTRYPOINT ["powershell.exe", "-file", "c:\\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart"]
