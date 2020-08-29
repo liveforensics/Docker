@@ -1,0 +1,12 @@
+version: '3'
+
+services:  
+    dockeragent:
+        image: liveforensics/dockeragent:2004
+        container_name: dockeragent
+        hostname: dockeragent
+        volumes:
+            - \\.\pipe\docker_engine:\\.\pipe\docker_engine
+        build:
+            context: .
+            dockerfile: Dockerfile
