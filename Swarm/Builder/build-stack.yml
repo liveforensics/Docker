@@ -87,10 +87,10 @@ services:
       resources:
         limits:
           cpus: '0.50'
-          memory: 1G
+          memory: 2G
         reservations:
           cpus: '0.25'
-          memory: 1G
+          memory: 2G
       
   nexus:
     image: sonatype/nexus3
