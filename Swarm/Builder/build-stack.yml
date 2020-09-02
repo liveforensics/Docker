@@ -91,7 +91,29 @@ services:
         reservations:
           cpus: '0.25'
           memory: 1G
-      
+
+  agenttest:
+    image: liveforensics/jenkinsagent:2004
+    networks:
+      - testlabnet
+    environment:
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080
+      - JENKINS_SECRET=672968099a0a56df6965c939f385bd2541a50846ca1a1c1f970f1135e9bdb312
+      - JENKINS_AGENT_NAME=TestMe
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
+        
+
   nexus:
     image: sonatype/nexus3
     networks:
