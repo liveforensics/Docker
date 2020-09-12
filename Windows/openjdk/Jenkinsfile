@@ -1,1 +1,34 @@
-echo 'hello docker'
+pipeline {
+    agent {
+        node {
+            label 'WinBuilder'
+        }
+    }
+    stages {
+        stage('Preparation') {
+            steps {
+                echo 'do some prep'
+                // git 'https://github.com/microsoft/VCSamples.git'
+                
+                
+            }
+        }
+        stage('Builder') {
+            steps {
+                echo 'do some build magic'
+                // dir('VC2015Samples\\scribble') {                    
+                //     script {                    
+                //         bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && msbuild.exe scribble.sln /p:Configuration=Debug /p:Platform=x64' 
+                //     }
+                }
+                
+                // bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'
+                
+
+                // powershell 'msbuild --version'
+            
+            }
+        }
+    }
+    
+}
