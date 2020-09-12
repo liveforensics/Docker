@@ -5,11 +5,17 @@ pipeline {
         }
     }
     stages {
-        stage('Preparation') {
+        stage('Setup') {
             steps {
-                echo 'do some prep'
+                echo 'cleaning up folders'
                 powershell 'remove-item -recurse -force Linux'
                 powershell 'remove-item -recurse -force Swarm'
+                bat 'mkdir BuildRoot'
+            }
+        }
+        stage('Preparation') {
+            steps {
+                
                 dir('Windows/openjdk') {
                     powershell 'ls'
                     bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
