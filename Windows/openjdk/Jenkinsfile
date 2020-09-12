@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'do some prep'
                 // git 'https://github.com/microsoft/VCSamples.git'
-                bat 'dir'
+                powershell 'ls'
                 bat 'docker images'
                 
             }
