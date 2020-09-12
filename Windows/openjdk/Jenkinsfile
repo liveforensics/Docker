@@ -11,7 +11,7 @@ pipeline {
                 // git 'https://github.com/microsoft/VCSamples.git'
                 dir('Windows/openjdk') {
                     powershell 'ls'
-                    bat 'docker images'
+                    bat 'docker-compose build'
                 }
                 
                 
