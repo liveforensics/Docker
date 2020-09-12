@@ -11,6 +11,7 @@ pipeline {
                 powershell 'remove-item -recurse -force Linux'
                 powershell 'remove-item -recurse -force Swarm'
                 bat 'mkdir BuildRoot'
+                powershell 'Copy-Item -Path Windows/openjdk -Destination BuildRoot -Recurse -Force'
             }
         }
         stage('Preparation') {
@@ -20,7 +21,7 @@ pipeline {
                     powershell 'ls'
                     bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
                     bat 'docker-compose build'
-                    bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
+                    // bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
                 }
                 
                 
