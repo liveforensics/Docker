@@ -12,6 +12,7 @@ pipeline {
                 dir('Windows/openjdk') {
                     powershell 'ls'
                     bat 'docker-compose build'
+                    bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
                 }
                 
                 
