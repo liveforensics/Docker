@@ -9,8 +9,11 @@ pipeline {
             steps {
                 echo 'do some prep'
                 // git 'https://github.com/microsoft/VCSamples.git'
-                powershell 'ls'
-                bat 'docker images'
+                dir('Windows/openjdk') {
+                    powershell 'ls'
+                    bat 'docker images'
+                }
+                
                 
             }
         }
