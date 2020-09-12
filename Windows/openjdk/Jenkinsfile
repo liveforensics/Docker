@@ -8,6 +8,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo 'do some prep'
+                powershell 'remove-item -recurse -force Linux'
                 // git 'https://github.com/microsoft/VCSamples.git'
                 dir('Windows/openjdk') {
                     powershell 'ls'
