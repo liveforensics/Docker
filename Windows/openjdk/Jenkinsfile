@@ -11,6 +11,7 @@ pipeline {
                 // git 'https://github.com/microsoft/VCSamples.git'
                 dir('Windows/openjdk') {
                     powershell 'ls'
+                    bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
                     bat 'docker-compose build'
                     bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
                 }
