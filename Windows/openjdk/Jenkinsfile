@@ -10,6 +10,7 @@ pipeline {
                 echo 'cleaning up folders'
                 powershell 'remove-item -recurse -force Linux'
                 powershell 'remove-item -recurse -force Swarm'
+                powershell 'remove-item -recurse -force BuildRoot'
                 bat 'mkdir BuildRoot'
                 powershell 'Copy-Item -Path Windows/openjdk -Destination BuildRoot -Recurse -Force'
             }
