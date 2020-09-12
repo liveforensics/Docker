@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'do some prep'
                 powershell 'remove-item -recurse -force Linux'
-                // git 'https://github.com/microsoft/VCSamples.git'
+                powershell 'remove-item -recurse -force Swarm'
                 dir('Windows/openjdk') {
                     powershell 'ls'
                     bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
