@@ -18,7 +18,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 
-                dir('Windows/openjdk') {
+                dir('BuildRoot') {
                     powershell 'ls'
                     bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
                     bat 'docker-compose build'
