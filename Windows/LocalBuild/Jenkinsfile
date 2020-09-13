@@ -28,7 +28,7 @@ pipeline {
                 dir('BuildRoot') {
                     powershell 'ls'
                     bat 'docker-compose build'
-                    bat 'docker run --rm -v "C:\\Visual Studio Layouts\\Build Tools:c:\\tools" liveforensics/buildbox:2004-jenkinsagent-temp'
+                    bat 'docker run --name temp1 -v "C:\\Visual Studio Layouts\\Build Tools:c:\\tools" liveforensics/buildbox:2004-jenkinsagent-temp'
                 }                                
             }
         }
