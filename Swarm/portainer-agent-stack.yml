@@ -13,24 +13,24 @@ services:
       placement:
         constraints: [node.platform.os == linux]
 
-  winagent:
-    image: portainer/agent:windows2004-amd64-2.0.0
-    volumes:
-      - \\.\pipe\docker_engine:\\.\pipe\docker_engine
-    networks:
-      - agent_network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == windows]
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 2G
-        reservations:
-          cpus: '0.25'
-          memory: 2G 
+  # winagent:
+  #   image: portainer/agent:windows2004-amd64-2.0.0
+  #   volumes:
+  #     - \\.\pipe\docker_engine:\\.\pipe\docker_engine
+  #   networks:
+  #     - agent_network
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == windows]
+  #     resources:
+  #       limits:
+  #         cpus: '0.50'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '0.25'
+  #         memory: 2G 
 
 
   portainer:
