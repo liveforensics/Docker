@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  openjdk:
+    image: liveforensics/buildbox:2004-jenkinsagent
+    container_name: jenkinsagent
+    build:
+      context: .
+      dockerfile: Dockerfile
