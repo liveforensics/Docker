@@ -13,8 +13,28 @@ services:
       placement:
         constraints: [node.platform.os == linux]
 
+  winagent:
+    image: portainer/agent:windows2004-amd64-2.0.0
+    volumes:
+      - \\.\pipe\docker_engine:\\.\pipe\docker_engine
+    networks:
+      - agent_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 2G 
+
+
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     command: -H tcp://tasks.agent:9001 --tlsskipverify
     ports:
       - "9000:9000"
@@ -36,3 +56,5 @@ networks:
 
 volumes:
   portainer_data:
+
+    # docker run -d --name portainer_agent --restart always --network portainer_agent_network -e AGENT_CLUSTER_ADDR=tasks.portainer_agent --mount type=npipe,source=\\.\pipe\docker_engine,target=\\.\pipe\docker_engine portainer/agent:windows2004-amd64-2.0.0
