@@ -29,7 +29,7 @@ pipeline {
                 dir('BuildRoot') {
                     script {
                         try {
-                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpc')
+                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpccc')
                             if(status == 0) {
                                 echo 'pull was successful'
                             }
