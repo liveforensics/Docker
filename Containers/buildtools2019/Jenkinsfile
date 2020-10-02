@@ -52,22 +52,22 @@ pipeline {
                 }                                
             }
         }
-        // stage('Builder') {
-        //     steps {
-        //         echo 'do some build magic'
-        //         // dir('VC2015Samples\\scribble') {                    
-        //         //     script {                    
-        //         //         bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && msbuild.exe scribble.sln /p:Configuration=Debug /p:Platform=x64' 
-        //         //     }
-        //         // }
+        stage('Builder') {
+            steps {
+                echo 'do some build magic'
+                // dir('VC2015Samples\\scribble') {                    
+                //     script {                    
+                //         bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && msbuild.exe scribble.sln /p:Configuration=Debug /p:Platform=x64' 
+                //     }
+                // }
                 
-        //         // bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'
+                // bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'
                 
 
-        //         // powershell 'msbuild --version'
+                // powershell 'msbuild --version'
             
-        //     }
-        // }
+            }
+        }
     }
     post { 
         always { 
