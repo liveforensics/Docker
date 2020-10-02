@@ -24,21 +24,21 @@ pipeline {
                 // powershell ''
             }
         }
-        stage('Preparation') {
+        stage('Stage 1') {
             steps {                
                 dir('BuildRoot') {
                     script {
-                        def message = 'nothing to see here'
                         try {
-                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpccc')
+                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpc')
                             if(status != 0) {
-                                message = 'pull was unsuccessful'
-                                error('docker pull failed') 
+                                error('DOCKER PULL FAILED') 
                             }
-                            
+                            status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpccc')
+                            if(status != 0) {
+                                error('DOCKER PULL FAILED') 
+                            }
                         }
                         catch (ex) {
-                            echo message
                             echo "Caught: ${ex}"
                             throw ex
                         }
