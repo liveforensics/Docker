@@ -28,8 +28,8 @@ pipeline {
             steps {                
                 dir('BuildRoot') {
                     script {
-                        def msg = powershell(returnStdout: true, script: 'python --version')
-                        println msg
+                        // def msg = powershell(returnStdout: true, script: 'python --version')
+                        // println msg
                         def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpc')
                         if(status == 0) {
                             echo 'pull was successful'
