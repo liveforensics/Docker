@@ -82,7 +82,19 @@ pipeline {
         stage('Stage 3') {
             steps {
                 dir('BuildRoot') {
-
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker-compose build')
+                            if(status != 0) {
+                                error('DOCKER COMPOSE FAILED') 
+                            }                            
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }
+                        
+                    }  
                 }
 
                 
