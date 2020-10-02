@@ -37,7 +37,7 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER COMPOSE FAILED') 
                             }
-                            status = bat(returnStatus: true, script: 'docker run --name step1 -v "C:\Visual Studio Layouts\Build Tools:c:\buildtools" temp/buildbox:2004-buildtools2019-step1')
+                            status = bat(returnStatus: true, script: 'docker run --name step1 -v "C:\\Visual Studio Layouts\\Build Tools:c:\\buildtools" temp/buildbox:2004-buildtools2019-step1')
                             if(status != 0) {
                                 error('DOCKER RUN FAILED') 
                             }
