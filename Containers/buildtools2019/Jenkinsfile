@@ -13,7 +13,8 @@ pipeline {
                     remove-item -recurse -force Swarm
                     remove-item -recurse -force Windows
                     remove-item -recurse -force BuildRoot -ErrorAction SilentlyContinue
-                    New-Item -Type Directory 'BuildRoot'                    
+                    New-Item -Type Directory 'BuildRoot'      
+                    Copy-Item -Path Containers/buildtools2019/* -Destination BuildRoot -Recurse -Force              
                 '''
                 // echo 'cleaning up folders'
                 // powershell ''
@@ -23,16 +24,16 @@ pipeline {
                 // powershell ''
             }
         }
-        // stage('Preparation') {
-        //     steps {                
-        //         dir('BuildRoot') {
-        //             powershell 'ls'
-        //             bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
-        //             bat 'docker-compose build'
-        //             bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
-        //         }                                
-        //     }
-        // }
+        stage('Preparation') {
+            steps {                
+                dir('BuildRoot') {
+                    powershell 'ls'
+                    bat 'docker pull liveforensics/buildbox:2004-powerpc'
+                    bat 'docker-compose build'
+                    bat 'docker push liveforensics/buildbox:2004-buildtools2019'
+                }                                
+            }
+        }
         // stage('Builder') {
         //     steps {
         //         echo 'do some build magic'
