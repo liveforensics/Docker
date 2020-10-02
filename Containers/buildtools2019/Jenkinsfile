@@ -37,6 +37,10 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER COMPOSE FAILED') 
                             }
+                            status = bat(returnStatus: true, script: 'docker run temp/buildbox:2004-buildtools2019-step1')
+                            if(status != 0) {
+                                error('DOCKER RUN FAILED') 
+                            }
                         }
                         catch (ex) {
                             echo "Caught: ${ex}"
