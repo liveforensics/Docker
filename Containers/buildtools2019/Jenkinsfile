@@ -42,12 +42,6 @@ pipeline {
                     New-Item -Type Directory 'BuildRoot'      
                     Copy-Item -Path Containers/buildtools2019/step1/* -Destination BuildRoot -Recurse -Force              
                 '''
-                // echo 'cleaning up folders'
-                // powershell ''
-                // powershell 'remove-item -recurse -force Swarm'
-                // powershell 'remove-item -recurse -force BuildRoot'
-                // bat 'mkdir BuildRoot'
-                // powershell ''
             }
         }
         stage('Stage 1') {
@@ -71,14 +65,6 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER COMMIT FAILED') 
                             }
-                            // status = bat(returnStatus: true, script: 'docker rm step1')
-                            // if(status != 0) {
-                            //     error('DOCKER REMOVE FAILED') 
-                            // }
-                            // status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1 temp/step1')
-                            // if(status != 0) {
-                            //     error('DOCKER REMOVE IMAGE FAILED') 
-                            // }
                         }
                         catch (ex) {
                             echo "Caught: ${ex}"
@@ -86,10 +72,6 @@ pipeline {
                         }
                         
                     }  
-                    // powershell 'ls'
-                    // bat 'docker pull liveforensics/buildbox:2004-powerpc'
-                    // bat 'docker-compose build'
-                    // bat 'docker run temp/buildbox:2004-buildtools2019-step1'
                 }                                
             }
         }
@@ -99,10 +81,7 @@ pipeline {
                     Write-Output 'Copying files for step 2.....'
                     Remove-Item BuildRoot/*  -Recurse -Force
                     Copy-Item -Path Containers/buildtools2019/step2/* -Destination BuildRoot -Recurse -Force              
-                '''
-
-                
-            
+                '''                            
             }
         }
         stage('Stage 3') {
@@ -121,10 +100,7 @@ pipeline {
                         }
                         
                     }  
-                }
-
-                
-            
+                }                            
             }
         }
         stage('Cleanup') {
@@ -152,7 +128,7 @@ pipeline {
     }
     post { 
         always { 
-            echo 'cleaning up the mess - hehe'
+            echo 'cleaning up the workspace'
             cleanWs()
         }
     }
