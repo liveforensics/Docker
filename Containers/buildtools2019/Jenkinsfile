@@ -41,11 +41,15 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER RUN FAILED') 
                             }
+                            status = bat(returnStatus: true, script: 'docker commit step1 temp/step1')
+                            if(status != 0) {
+                                error('DOCKER COMMIT FAILED') 
+                            }
                             // status = bat(returnStatus: true, script: 'docker rm step1')
                             // if(status != 0) {
                             //     error('DOCKER REMOVE FAILED') 
                             // }
-                            // status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1')
+                            // status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1 temp/step1')
                             // if(status != 0) {
                             //     error('DOCKER REMOVE IMAGE FAILED') 
                             // }
@@ -65,17 +69,23 @@ pipeline {
         }
         stage('Builder') {
             steps {
-                echo 'do some build magic'
-                // dir('VC2015Samples\\scribble') {                    
-                //     script {                    
-                //         bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && msbuild.exe scribble.sln /p:Configuration=Debug /p:Platform=x64' 
-                //     }
-                // }
-                
-                // bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'
-                
+                powershell '''
+                    Write-Output 'Copying files for step 2.....'
+                    Remove-Item BuildRoot/*  -Recurse -Force
+                    Copy-Item -Path Containers/buildtools2019/step2/* -Destination BuildRoot -Recurse -Force              
+                '''
 
-                // powershell 'msbuild --version'
+                
+            
+            }
+        }
+        stage('Builder') {
+            steps {
+                dir('BuildRoot') {
+
+                }
+
+                
             
             }
         }
