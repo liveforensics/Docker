@@ -49,7 +49,7 @@ pipeline {
                 dir('BuildRoot') {
                     script {
                         try {
-                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpc')
+                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-jenkinsagent')
                             if(status != 0) {
                                 error('DOCKER PULL FAILED') 
                             }
