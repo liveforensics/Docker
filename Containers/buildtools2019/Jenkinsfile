@@ -38,12 +38,10 @@ pipeline {
                             
                         }
                         catch (ex) {
-                            echo 'in catch block'
                             echo message
+                            echo ex
                             throw ex
                         }
-                        // def msg = powershell(returnStdout: true, script: 'python --version')
-                        // println msg
                         
                     }  
                     // powershell 'ls'
