@@ -45,6 +45,10 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER REMOVE FAILED') 
                             }
+                            status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1')
+                            if(status != 0) {
+                                error('DOCKER REMOVE IMAGE FAILED') 
+                            }
                         }
                         catch (ex) {
                             echo "Caught: ${ex}"
