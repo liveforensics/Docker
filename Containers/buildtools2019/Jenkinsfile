@@ -27,20 +27,20 @@ pipeline {
         stage('Preparation') {
             steps {                
                 dir('BuildRoot') {
-                    script {
-                        try {
+                    try {
+                        script {
                             def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpccc')
                             if(status == 0) {
                                 echo 'pull was successful'
                             }
                         }
-                        catch (ex) {
-                            echo 'pull failed'
-                        }
                         // def msg = powershell(returnStdout: true, script: 'python --version')
-                        // println msg
-                        
-                    }  
+                        // println msg                        
+                    }                      
+                    catch (ex) {
+                        echo 'pull failed'
+                    }
+                    
                     // powershell 'ls'
                     // bat 'docker pull liveforensics/buildbox:2004-powerpc'
                     // bat 'docker-compose build'
