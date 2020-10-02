@@ -14,7 +14,7 @@ pipeline {
                     remove-item -recurse -force Windows
                     remove-item -recurse -force BuildRoot -ErrorAction SilentlyContinue
                     New-Item -Type Directory 'BuildRoot'      
-                    Copy-Item -Path Containers/buildtools2019/* -Destination BuildRoot -Recurse -Force              
+                    Copy-Item -Path Containers/buildtools2019/step1/* -Destination BuildRoot -Recurse -Force              
                 '''
                 // echo 'cleaning up folders'
                 // powershell ''
@@ -30,7 +30,7 @@ pipeline {
                     powershell 'ls'
                     bat 'docker pull liveforensics/buildbox:2004-powerpc'
                     bat 'docker-compose build'
-                    bat 'docker push liveforensics/buildbox:2004-buildtools2019'
+                    bat 'docker run temp/buildbox:2004-buildtools2019-step1'
                 }                                
             }
         }
