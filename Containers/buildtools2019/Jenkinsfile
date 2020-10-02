@@ -87,7 +87,11 @@ pipeline {
                             def status = bat(returnStatus: true, script: 'docker-compose build')
                             if(status != 0) {
                                 error('DOCKER COMPOSE FAILED') 
-                            }                            
+                            }      
+                            status = bat(returnStatus: true, script: 'docker push liveforensics/buildbox:2004-buildtools2019')
+                            if(status != 0) {
+                                error('DOCKER PUSH FAILED') 
+                            }                      
                         }
                         catch (ex) {
                             echo "Caught: ${ex}"
