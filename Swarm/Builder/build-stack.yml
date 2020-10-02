@@ -17,7 +17,7 @@ services:
         placement:
           constraints: [node.role == manager]
 
-  buildbox:
+  buildtoolsppc:
     image: liveforensics/buildbox:2004-powerpc
     networks:
       - testlabnet
@@ -38,25 +38,26 @@ services:
           cpus: '0.25'
           memory: 2G
 
-  # buildbox3:
-  #   image: liveforensics/buildbox:2004-full-jenkins
-  #   networks:
-  #     - testlabnet
-  #   environment:
-  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20dotnet/slave-agent.jnlp
-  #     - JENKINS_SECRET=a295b8a618dc7b5b525395ffeedea6a58b79cb3ae5e5382c2b6bed2f6bf6bef3
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     placement:
-  #       constraints: [node.platform.os == windows]
-  #     resources:
-  #       limits:
-  #         cpus: '0.50'
-  #         memory: 2G
-  #       reservations:
-  #         cpus: '0.25'
-  #         memory: 2G
+  buildtools2019:
+    image: liveforensics/buildbox:2004-buildtools2019
+    networks:
+      - testlabnet
+    environment:
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080
+      - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
+      - JENKINS_AGENT_NAME=buildtools2019
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 2G
         
   # buildbox2:
   #   image: liveforensics/buildboxgcc:1.0.0-jenkins
