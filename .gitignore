@@ -19,6 +19,7 @@ id_rsa
 id_rsa.pub
 !Linux/Buildbox/id_rsa*
 OpenSSH/
+!powerpc-eabi.zip
 
 authorized_keys
 
