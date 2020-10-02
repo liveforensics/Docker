@@ -67,7 +67,7 @@ pipeline {
                 }                                
             }
         }
-        stage('Builder') {
+        stage('Stage 2') {
             steps {
                 powershell '''
                     Write-Output 'Copying files for step 2.....'
@@ -79,7 +79,7 @@ pipeline {
             
             }
         }
-        stage('Builder') {
+        stage('Stage 3') {
             steps {
                 dir('BuildRoot') {
 
