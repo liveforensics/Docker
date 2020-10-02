@@ -5,4 +5,4 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 ADD build.ps1 c:\temp\build.ps1
 
-ENTRYPOINT ["powershell.exe", "-f", "C:/temp/build1.ps1"]
+ENTRYPOINT ["powershell.exe", "-f", "C:/temp/build.ps1"]
