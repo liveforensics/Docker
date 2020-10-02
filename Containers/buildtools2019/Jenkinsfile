@@ -5,6 +5,32 @@ pipeline {
         }
     }
     stages {
+        stage('Check') {
+            steps {
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker rm step1')
+                            if(status != 0) {
+                                error('NO CONTAINERS NEEDED REMOVING') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"                            
+                        }     
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1 temp/step1')
+                            if(status != 0) {
+                                error('NO IMAGES NEEDED REMOVING') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"                            
+                        }                        
+                    }  
+                }  
+            }
+        }
         stage('Setup') {
             steps {
                 powershell '''
@@ -126,13 +152,8 @@ pipeline {
                         catch (ex) {
                             echo "Caught: ${ex}"
                             throw ex
-                        }
-                        
+                        }                        
                     }  
-                    // powershell 'ls'
-                    // bat 'docker pull liveforensics/buildbox:2004-powerpc'
-                    // bat 'docker-compose build'
-                    // bat 'docker run temp/buildbox:2004-buildtools2019-step1'
                 }                                
             }
         }
