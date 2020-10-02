@@ -23,8 +23,8 @@ services:
       - testlabnet
     environment:
       - JENKINS_URL=http://dockerhost01.testlab.local:8080
-      - JENKINS_SECRET=07f70e7beb9bcd83b4bca09bdbe1a6322441cab90483c534511cf0c41c3e7034
-      - JENKINS_AGENT_NAME='Windows One'
+      - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
+      - JENKINS_AGENT_NAME=ppc
     deploy:
       mode: replicated
       replicas: 1
