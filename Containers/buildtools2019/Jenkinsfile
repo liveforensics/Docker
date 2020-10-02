@@ -88,6 +88,10 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER COMPOSE FAILED') 
                             }      
+                            status = bat(returnStatus: true, script: 'docker login')
+                            if(status != 0) {
+                                error('DOCKER LOGIN FAILED') 
+                            }  
                             status = bat(returnStatus: true, script: 'docker push liveforensics/buildbox:2004-buildtools2019')
                             if(status != 0) {
                                 error('DOCKER PUSH FAILED') 
