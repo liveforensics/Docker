@@ -33,9 +33,9 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER PULL FAILED') 
                             }
-                            status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpccc')
+                            status = bat(returnStatus: true, script: 'docker-compose build')
                             if(status != 0) {
-                                error('DOCKER PULL FAILED') 
+                                error('DOCKER COMPOSE FAILED') 
                             }
                         }
                         catch (ex) {
