@@ -41,7 +41,7 @@ pipeline {
                             if(status != 0) {
                                 error('DOCKER RUN FAILED') 
                             }
-                            status = bat(returnStatus: true, script: 'docker rm deleteme temp/buildbox:2004-buildtools2019-step1')
+                            status = bat(returnStatus: true, script: 'docker rm deleteme')
                             if(status != 0) {
                                 error('DOCKER REMOVE FAILED') 
                             }
