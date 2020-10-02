@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
     buildtools2019:
-      image: temp/buildbox:2004-buildtools2019-step2
+      image: liveforensics/buildbox:2004-buildtools2019
       container_name: buildtools2019
       build:
         context: .
