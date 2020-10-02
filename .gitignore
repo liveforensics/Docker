@@ -8,6 +8,7 @@
 *.sln.docstates
 *.tar
 *.exe
+*.zip
 jenkins-slave.exe
 jenkins-slave.exe.config
 jenkins-slave.xml
