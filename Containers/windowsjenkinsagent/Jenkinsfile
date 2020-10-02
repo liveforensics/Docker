@@ -23,30 +23,27 @@ pipeline {
                 // powershell ''
             }
         }
-        stage('Preparation') {
+        stage('Stage 1') {
             steps {                
                 dir('BuildRoot') {
-                    powershell 'ls'
-                    bat 'docker pull mcr.microsoft.com/windows/servercore:2004'
-                    bat 'docker-compose build'
-                    bat 'docker push liveforensics/buildbox:2004-jenkinsagent'
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker pull mcr.microsoft.com/windows/servercore:2004')
+                            if(status != 0) {
+                                error('DOCKER PULL FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker-compose build')
+                            if(status != 0) {
+                                error('DOCKER COMPOSE FAILED') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }
+                        
+                    }  
                 }                                
-            }
-        }
-        stage('Builder') {
-            steps {
-                echo 'do some build magic'
-                // dir('VC2015Samples\\scribble') {                    
-                //     script {                    
-                //         bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat && msbuild.exe scribble.sln /p:Configuration=Debug /p:Platform=x64' 
-                //     }
-                // }
-                
-                // bat 'call C:\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'
-                
-
-                // powershell 'msbuild --version'
-            
             }
         }
     }
