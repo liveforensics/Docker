@@ -39,7 +39,7 @@ pipeline {
                         }
                         catch (ex) {
                             echo message
-                            echo ${ex}
+                            echo "${ex}""
                             throw ex
                         }
                         
