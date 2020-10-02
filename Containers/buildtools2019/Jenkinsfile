@@ -27,10 +27,18 @@ pipeline {
         stage('Preparation') {
             steps {                
                 dir('BuildRoot') {
-                    powershell 'ls'
-                    bat 'docker pull liveforensics/buildbox:2004-powerpc'
-                    bat 'docker-compose build'
-                    bat 'docker run temp/buildbox:2004-buildtools2019-step1'
+                    script {
+                        def msg = powershell(returnStdout: true, script: 'python --version')
+                        println msg
+                        def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-powerpc')
+                        if(status == 0) {
+                            echo 'pull was successful'
+                        }
+                    }  
+                    // powershell 'ls'
+                    // bat 'docker pull liveforensics/buildbox:2004-powerpc'
+                    // bat 'docker-compose build'
+                    // bat 'docker run temp/buildbox:2004-buildtools2019-step1'
                 }                                
             }
         }
