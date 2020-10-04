@@ -1,5 +1,5 @@
 # escape=`
-FROM liveforensics//inbound-agent:windowsservercore-2004
+FROM liveforensics/inbound-agent:windowsservercore-2004
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
