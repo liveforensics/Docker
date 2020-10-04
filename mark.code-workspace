@@ -6,8 +6,5 @@
 	],
 	"settings": {
 		"editor.glyphMargin": false
-	},
-	"files.associations": {
-        "Dockerfile*": "Dockerfile"
-    }
+	}
 }
