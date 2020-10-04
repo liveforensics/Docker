@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   openjdk:
-    image: liveforensics/buildbox:2004-jenkinsagent
+    image: liveforensics/inbound-agent:windowsservercore-2004
     container_name: jenkinsagent
     build:
       context: .
