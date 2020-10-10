@@ -131,5 +131,11 @@ if(![System.String]::IsNullOrWhiteSpace($Cmd)) {
 
     #TODO: Handle the case when the command-line and Environment variable contain different values.
     #It is fine it blows up for now since it should lead to an error anyway.
-    Start-Process -FilePath $JAVA_BIN -Wait -NoNewWindow -ArgumentList $AgentArguments
+    Write-Host 'Starting the Agent'
+    while($true)
+    {
+        Start-Process -FilePath $JAVA_BIN -Wait -NoNewWindow -ArgumentList $AgentArguments
+        Start-Sleep -Seconds 10
+        Write-Host 'Restarting the Agent'
+    }
 }
