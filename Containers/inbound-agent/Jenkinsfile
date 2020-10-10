@@ -13,7 +13,7 @@ pipeline {
                     remove-item -recurse -force Swarm
                     remove-item -recurse -force BuildRoot -ErrorAction SilentlyContinue
                     New-Item -Type Directory 'BuildRoot'
-                    Copy-Item -Path Containers/windowsjenkinsagent/* -Destination BuildRoot -Recurse -Force
+                    Copy-Item -Path Containers/inbound-agent/* -Destination BuildRoot -Recurse -Force
                 '''
                 // echo 'cleaning up folders'
                 // powershell ''

@@ -1,5 +1,5 @@
 # escape=`
-FROM liveforensics/buildbox:2004-jenkinsagent
+FROM liveforensics/inbound-agent:windowsservercore-2004
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
