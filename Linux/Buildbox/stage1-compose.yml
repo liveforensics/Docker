@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
     buildboxgcc:
-        image: liveforensics/buildboxgcc:1.0.0
+        image: liveforensics/buildboxgcc:1.0.1
         container_name: buildboxgcc
         build:
             context: .

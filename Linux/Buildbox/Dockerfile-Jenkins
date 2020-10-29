@@ -1,6 +1,6 @@
 # escape=`
 
-FROM liveforensics/buildboxgcc:1.0.0
+FROM liveforensics/buildboxgcc:1.0.1
 LABEL maintainer=liveforensics description="Linux Build Jenkins enabled Image"
 
 # Add user jenkins to the image
