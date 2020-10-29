@@ -2,7 +2,6 @@ version: '3.2'
 
 services:
   orchestrator:
-    # image: jenkins/jenkins:2.235.2-lts-centos7
     image: jenkins/jenkins:latest
     networks:
       - testlabnet
@@ -18,13 +17,14 @@ services:
         placement:
           constraints: [node.role == manager]
 
-  buildbox:
-    image: liveforensics/buildbox:2004-jenkins
+  buildtoolsppc:
+    image: liveforensics/buildbox:2004-powerpc
     networks:
       - testlabnet
     environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20One/slave-agent.jnlp
-      - JENKINS_SECRET=07f70e7beb9bcd83b4bca09bdbe1a6322441cab90483c534511cf0c41c3e7034
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080
+      - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
+      - JENKINS_AGENT_NAME=ppc
     deploy:
       mode: replicated
       replicas: 1
@@ -38,13 +38,14 @@ services:
           cpus: '0.25'
           memory: 2G
 
-  buildbox3:
-    image: liveforensics/buildbox:2004-full-jenkins
+  buildtools2019:
+    image: liveforensics/buildbox:2004-buildtools2019
     networks:
       - testlabnet
     environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/Windows%20dotnet/slave-agent.jnlp
-      - JENKINS_SECRET=a295b8a618dc7b5b525395ffeedea6a58b79cb3ae5e5382c2b6bed2f6bf6bef3
+      - JENKINS_URL=http://dockerhost01.testlab.local:8080
+      - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
+      - JENKINS_AGENT_NAME=buildtools2019
     deploy:
       mode: replicated
       replicas: 1
@@ -58,60 +59,60 @@ services:
           cpus: '0.25'
           memory: 2G
         
-  buildbox2:
-    image: liveforensics/buildboxgcc:1.0.0-jenkins
-    networks:
-      - testlabnet
-    ports:
-      - "22:22" 
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == linux]
+  # buildbox2:
+  #   image: liveforensics/buildboxgcc:1.0.0-jenkins
+  #   networks:
+  #     - testlabnet
+  #   ports:
+  #     - "30022:22" 
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == linux]
 
-  sdk71:
-    image: liveforensics/buildbox:2004-sdk7.1-jenkins
-    networks:
-      - testlabnet
-    ports:
-      - "20022:22" 
-    environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/sdk7/slave-agent.jnlp
-      - JENKINS_SECRET=2858399af1e04a1ebe792aa60f2c5dce36e67a2f723a944fce95a17725d55c9e
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == windows]
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 2G
-        reservations:
-          cpus: '0.25'
-          memory: 2G
+  # sdk71:
+  #   image: liveforensics/buildbox:2004-sdk7.1-jenkins
+  #   networks:
+  #     - testlabnet
+  #   ports:
+  #     - "20022:22" 
+  #   environment:
+  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080/computer/sdk7/slave-agent.jnlp
+  #     - JENKINS_SECRET=2858399af1e04a1ebe792aa60f2c5dce36e67a2f723a944fce95a17725d55c9e
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == windows]
+  #     resources:
+  #       limits:
+  #         cpus: '0.50'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '0.25'
+  #         memory: 2G
           
-  agenttest:
-    image: liveforensics/jenkinsagent:2004
-    networks:
-      - testlabnet
-    environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080
-      - JENKINS_SECRET=672968099a0a56df6965c939f385bd2541a50846ca1a1c1f970f1135e9bdb312
-      - JENKINS_AGENT_NAME=TestMe
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == windows]
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 1G
-        reservations:
-          cpus: '0.25'
-          memory: 1G    
+  # agenttest:
+  #   image: liveforensics/jenkinsagent:2004
+  #   networks:
+  #     - testlabnet
+  #   environment:
+  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080
+  #     - JENKINS_SECRET=672968099a0a56df6965c939f385bd2541a50846ca1a1c1f970f1135e9bdb312
+  #     - JENKINS_AGENT_NAME=TestMe
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == windows]
+  #     resources:
+  #       limits:
+  #         cpus: '0.50'
+  #         memory: 1G
+  #       reservations:
+  #         cpus: '0.25'
+  #         memory: 1G    
 
   nexus:
     image: sonatype/nexus3

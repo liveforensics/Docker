@@ -8,6 +8,7 @@
 *.sln.docstates
 *.tar
 *.exe
+*.zip
 jenkins-slave.exe
 jenkins-slave.exe.config
 jenkins-slave.xml
@@ -18,6 +19,7 @@ id_rsa
 id_rsa.pub
 !Linux/Buildbox/id_rsa*
 OpenSSH/
+!powerpc-eabi.zip
 
 authorized_keys
 

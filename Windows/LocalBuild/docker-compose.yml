@@ -1,9 +1,0 @@
-version: '3.0'
-
-services:
-    jenkinsagenttemp:
-        image: liveforensics/buildbox:2004-jenkinsagent-temp
-        container_name: jenkinsagenttemp
-        build:
-            context: .
-            dockerfile: Dockerfile

@@ -1,0 +1,148 @@
+pipeline {
+    agent {
+        node {
+            label 'windocker'
+        }
+    }
+    stages {
+        stage('Check') {
+            steps {
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker rm step1')
+                            if(status != 0) {
+                                error('NO CONTAINERS NEEDED REMOVING') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"                            
+                        }     
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1 temp/step1')
+                            if(status != 0) {
+                                error('NO IMAGES NEEDED REMOVING') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"                            
+                        }                        
+                    }  
+                }  
+            }
+        }
+        stage('Setup') {
+            steps {
+                powershell '''
+                    Write-Output 'Cleaning Up Folders and Copying Files.....'
+                    remove-item -recurse -force Linux
+                    remove-item -recurse -force Swarm
+                    remove-item -recurse -force Windows
+                    remove-item -recurse -force BuildRoot -ErrorAction SilentlyContinue
+                    New-Item -Type Directory 'BuildRoot'      
+                    Copy-Item -Path Containers/buildtools2019/step1/* -Destination BuildRoot -Recurse -Force              
+                '''
+            }
+        }
+        stage('Stage 1') {
+            steps {                
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker pull liveforensics/buildbox:2004-jenkinsagent')
+                            if(status != 0) {
+                                error('DOCKER PULL FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker-compose build')
+                            if(status != 0) {
+                                error('DOCKER COMPOSE FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker run --name step1 -v "C:\\Visual Studio Layouts\\Build Tools:c:\\vs" temp/buildbox:2004-buildtools2019-step1')
+                            if(status != 0) {
+                                error('DOCKER RUN FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker commit step1 temp/step1')
+                            if(status != 0) {
+                                error('DOCKER COMMIT FAILED') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }
+                        
+                    }  
+                }                                
+            }
+        }
+        stage('Stage 2') {
+            steps {
+                powershell '''
+                    Write-Output 'Copying files for step 2.....'
+                    Remove-Item BuildRoot/*  -Recurse -Force
+                    Copy-Item -Path Containers/buildtools2019/step2/* -Destination BuildRoot -Recurse -Force              
+                '''                            
+            }
+        }
+        stage('Stage 3') {
+            steps {
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker-compose build')
+                            if(status != 0) {
+                                error('DOCKER COMPOSE FAILED') 
+                            }      
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }
+                        
+                    }  
+                }                            
+            }
+        }
+        stage('Cleanup') {
+            steps {                
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker rm step1')
+                            if(status != 0) {
+                                error('DOCKER REMOVE FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker rmi temp/buildbox:2004-buildtools2019-step1 temp/step1')
+                            if(status != 0) {
+                                error('DOCKER REMOVE IMAGE FAILED') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }                        
+                    }  
+                }                                
+            }
+        }
+    }
+    post { 
+        always { 
+            echo 'cleaning up the workspace'
+            cleanWs()
+        }
+        success {
+            echo 'This will run only if successful'
+        }
+        failure {
+            echo 'This will run only if failed'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
+    }
+}

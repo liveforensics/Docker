@@ -1,0 +1,55 @@
+pipeline {
+    agent {
+        node {
+            label 'windocker'
+        }
+    }
+    stages {
+        stage('Setup') {
+            steps {
+                powershell '''
+                    Write-Output 'Cleaning Up Folders and Copying Files...'
+                    remove-item -recurse -force Linux
+                    remove-item -recurse -force Swarm
+                    remove-item -recurse -force BuildRoot -ErrorAction SilentlyContinue
+                    New-Item -Type Directory 'BuildRoot'
+                    Copy-Item -Path Containers/inbound-agent/* -Destination BuildRoot -Recurse -Force
+                '''
+                // echo 'cleaning up folders'
+                // powershell ''
+                // powershell 'remove-item -recurse -force Swarm'
+                // powershell 'remove-item -recurse -force BuildRoot'
+                // bat 'mkdir BuildRoot'
+                // powershell ''
+            }
+        }
+        stage('Stage 1') {
+            steps {                
+                dir('BuildRoot') {
+                    script {
+                        try {
+                            def status = bat(returnStatus: true, script: 'docker pull mcr.microsoft.com/windows/servercore:2004')
+                            if(status != 0) {
+                                error('DOCKER PULL FAILED') 
+                            }
+                            status = bat(returnStatus: true, script: 'docker-compose build')
+                            if(status != 0) {
+                                error('DOCKER COMPOSE FAILED') 
+                            }
+                        }
+                        catch (ex) {
+                            echo "Caught: ${ex}"
+                            throw ex
+                        }
+                        
+                    }  
+                }                                
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
