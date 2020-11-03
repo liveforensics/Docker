@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+    shark:
+        image: liveforensics/buildbox:2004-shark
+        container_name: shark2004
+        build:
+            context: .
+            dockerfile: Dockerfile
+  

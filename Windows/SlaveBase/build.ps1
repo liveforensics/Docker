@@ -37,7 +37,7 @@ choco.exe install -y git
 Write-Host "Installing Python 2"
 choco.exe install -y python2
 # Now we'll install Java
-Write-Host "Installing git"
+Write-Host "Installing Java"
 choco.exe install jdk8 /exclude:32 -y
 
 Write-Host "Creating a Jenkins User Account "
