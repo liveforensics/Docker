@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
     buildboxgcc:
-        image: liveforensics/inbound-agent:linux-1.0.0
+        image: liveforensics/inbound-agent:linux-1.0.1
         container_name: buildboxgcc
         build:
             context: .
