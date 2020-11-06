@@ -12,8 +12,9 @@ ADD build.ps1 c:\temp\build.ps1
 
 RUN c:\temp\build.ps1
 
-# WORKDIR c:\development
-# RUN git clone 'https://gitlab.com/wireshark/wireshark.git'
+WORKDIR c:\development
+RUN git clone 'https://gitlab.com/wireshark/wireshark.git'
+ADD go.ps1 c:\Development\wsbuild64\go.ps1
 
 # # Copy our Install script.
 # COPY install.cmd C:\TEMP\
@@ -52,6 +53,8 @@ ENV QT5_BASE_DIR="c:\Qt\5.12.9\msvc2017_64"
 ENV WIRESHARK_BASE_DIR="C:\Development"
 ENV WIRESHARK_LIB_DIR="c:\wireshark-win64-libs"
 
+WORKDIR c:\development\wsbuild64
+RUN cmake -G "Visual Studio 16 2019" -A x64 ..\wireshark
 
 # Define the entry point for the docker container.
 # This entry point starts the developer command prompt and launches the PowerShell shell.

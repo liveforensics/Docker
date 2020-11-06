@@ -14,8 +14,8 @@ choco install -y activeperl
 Write-Host "Installing git"
 choco.exe install -y git
 
-# Write-Host "Installing Java"
-# choco install -y openjdk11
+Write-Host "Installing Java"
+choco install -y openjdk11
 
 Write-Host "Installing CMake"
 choco install -y cmake
@@ -28,6 +28,7 @@ choco install -y winflexbison3
 
 Write-Host "Creating development folder"
 New-Item -ItemType Directory -Path c:\Development
+New-Item -ItemType Directory -Path c:\Development\wsbuild64
 
 Write-Host "Installing vs community edition"
 choco install -y visualstudio2019community visualstudio2019-workload-nativedesktop
