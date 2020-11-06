@@ -14,20 +14,20 @@ choco install -y activeperl
 Write-Host "Installing git"
 choco.exe install -y git
 
-Write-Host "Installing Java"
-choco install openjdk11
+# Write-Host "Installing Java"
+# choco install -y openjdk11
 
 Write-Host "Installing CMake"
 choco install -y cmake
 
 Write-Host "Installing Asciidoctor"
-choco install -y asciidoctorj xsltproc docbook-bundle
+choco install -y asciidoctorj xsltproc
 
 Write-Host "Installing winflexbison"
 choco install -y winflexbison3
 
 Write-Host "Creating development folder"
-New-Item -ItemType Directory -Path c:\development
+New-Item -ItemType Directory -Path c:\Development
 
 Write-Host "Installing vs community edition"
 choco install -y visualstudio2019community visualstudio2019-workload-nativedesktop
