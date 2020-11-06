@@ -26,6 +26,5 @@ choco install -y winflexbison3
 Write-Host "Creating development folder"
 New-Item -ItemType Directory -Path c:\development
 
-Write-Host "Cloning Wireshark from Github"
-set-location c:\development
-git clone "https://gitlab.com/wireshark/wireshark.git"
+Write-Host "Installing vs community edition"
+choco install -y visualstudio2019community visualstudio2019-workload-nativedesktop
