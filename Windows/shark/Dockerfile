@@ -12,8 +12,8 @@ ADD build.ps1 c:\temp\build.ps1
 
 RUN c:\temp\build.ps1
 
-WORKDIR c:\development
-RUN git clone 'https://gitlab.com/wireshark/wireshark.git'
+# WORKDIR c:\development
+# RUN git clone 'https://gitlab.com/wireshark/wireshark.git'
 
 # # Copy our Install script.
 # COPY install.cmd C:\TEMP\
@@ -48,7 +48,7 @@ SHELL ["cmd", "/S", "/C"]
 # # ADD http://download.qt.io/official_releases/qt/5.12/5.12.9/qt-opensource-windows-x86-5.12.9.exe c:\temp\qt.exe
 
 RUN SETX /M Path "%Path%;C:\\program files\\cmake\\bin;"
-ENV QT5_BASE_DIR="c:\Qt\Qt5.12.9\5.12.9\msvc2017_64"
+ENV QT5_BASE_DIR="c:\Qt\5.12.9\msvc2017_64"
 ENV WIRESHARK_BASE_DIR="C:\Development"
 ENV WIRESHARK_LIB_DIR="c:\wireshark-win64-libs"
 
