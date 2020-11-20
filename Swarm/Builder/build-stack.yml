@@ -131,11 +131,7 @@ services:
 networks:
   testlabnet:
     # driver: overlay
-    ipam:
-      driver: overlay
-      config:
-        - subnet: 10.0.11.0/24
-    attachable: true
-
+    # attachable: true
+    external: true
 
 #  --subnet 10.0.0.0/23 --ip-range 10.0.1.0/24 --gateway 10.0.0.1
