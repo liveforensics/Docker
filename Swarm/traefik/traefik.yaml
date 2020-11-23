@@ -6,7 +6,7 @@ services:
     image: traefik:v2.3.3
     hostname: 'traefik.testlab.local'
     networks:
-      - traefik-public
+      - testlab-network
     deploy:
       mode: replicated
       replicas: 1
@@ -32,7 +32,7 @@ services:
     image: traefik/whoami
     hostname: 'whoami.testlab.local'
     networks:
-      - traefik-public
+      - testlab-network
     deploy:
       labels:
         - "traefik.http.routers.whoami.rule=Host(`whoami.testlab.local`)"      
@@ -62,6 +62,6 @@ services:
 #   nexus-home:
 
 networks:
-  traefik-public:
+  testlab-network:
     external: true
 

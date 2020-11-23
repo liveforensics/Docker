@@ -3,61 +3,65 @@ version: '3.2'
 services:
   orchestrator:
     image: jenkins/jenkins:latest
+    hostname: 'jenkins.testlab.local'
     networks:
-      - testlabnet
-    ports:
-        - "8080:8080"
-        - "50000:50000"
+      - testlab-network
+    # ports:
+    #     - "8080:8080"
+    #     - "50000:50000"
     volumes:
       - /home/sysadmin/docker-shared/user-volumes/orchestrator/jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
-        mode: replicated
-        replicas: 1
-        placement:
-          constraints: [node.role == manager]
-
-  buildtoolsppc:
-    image: liveforensics/buildbox:2004-powerpc
-    networks:
-      - testlabnet
-    environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080
-      - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
-      - JENKINS_AGENT_NAME=ppc
-    deploy:
       mode: replicated
       replicas: 1
       placement:
-        constraints: [node.platform.os == windows]
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 2G
-        reservations:
-          cpus: '0.25'
-          memory: 2G
+        constraints: [node.role == manager]
+      labels:
+        - "traefik.http.routers.orchestrator.rule=Host(`jenkins.testlab.local`)"
+        - "traefik.http.services.orchestrator-service.loadbalancer.server.port=8080"
 
-  buildtools2019:
-    image: liveforensics/buildbox:2004-buildtools2019
-    networks:
-      - testlabnet
-    environment:
-      - JENKINS_URL=http://dockerhost01.testlab.local:8080
-      - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
-      - JENKINS_AGENT_NAME=buildtools2019
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == windows]
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 2G
-        reservations:
-          cpus: '0.25'
-          memory: 2G
+  # buildtoolsppc:
+  #   image: liveforensics/buildbox:2004-powerpc
+  #   networks:
+  #     - testlabnet
+  #   environment:
+  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080
+  #     - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
+  #     - JENKINS_AGENT_NAME=ppc
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == windows]
+  #     resources:
+  #       limits:
+  #         cpus: '0.50'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '0.25'
+  #         memory: 2G
+
+  # buildtools2019:
+  #   image: liveforensics/buildbox:2004-buildtools2019
+  #   networks:
+  #     - testlabnet
+  #   environment:
+  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080
+  #     - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
+  #     - JENKINS_AGENT_NAME=buildtools2019
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == windows]
+  #     resources:
+  #       limits:
+  #         cpus: '0.50'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '0.25'
+  #         memory: 2G
         
   # buildbox2:
   #   image: liveforensics/buildboxgcc:1.0.0-jenkins
@@ -114,21 +118,25 @@ services:
   #         cpus: '0.25'
   #         memory: 1G    
 
-  nexus:
-    image: sonatype/nexus3
-    networks:
-      - testlabnet
-    ports:
-      - "8081:8081"
-    volumes:
-      - /home/sysadmin/docker-shared/user-volumes/nexus3:/nexus-data
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == linux]
+  # nexus:
+  #   image: sonatype/nexus3
+  #   networks:
+  #     - testlabnet
+  #   ports:
+  #     - "8081:8081"
+  #   volumes:
+  #     - /home/sysadmin/docker-shared/user-volumes/nexus3:/nexus-data
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     placement:
+  #       constraints: [node.platform.os == linux]
+
+# networks:
+#   testlabnet:
+#     driver: overlay
+#     attachable: true
 
 networks:
-  testlabnet:
-    driver: overlay
-    attachable: true
+  testlab-network:
+    external: true
