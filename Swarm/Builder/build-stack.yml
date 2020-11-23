@@ -118,19 +118,21 @@ services:
   #         cpus: '0.25'
   #         memory: 1G    
 
-  # nexus:
-  #   image: sonatype/nexus3
-  #   networks:
-  #     - testlabnet
-  #   ports:
-  #     - "8081:8081"
-  #   volumes:
-  #     - /home/sysadmin/docker-shared/user-volumes/nexus3:/nexus-data
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     placement:
-  #       constraints: [node.platform.os == linux]
+  nexus:
+    image: sonatype/nexus3
+    hostname: 'nexus.testlab.local'
+    networks:
+      - testlab-network
+    # ports:
+    #   - "8081:8081"
+    volumes:
+      - /home/sysadmin/docker-shared/user-volumes/nexus3:/nexus-data
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.http.routers.nexus.rule=Host(`nexus.testlab.local`)"
+        - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
 
 # networks:
 #   testlabnet:
