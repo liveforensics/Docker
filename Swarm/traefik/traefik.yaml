@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.3.3
+    hostname: 'traefik.testlab.local'
+    networks:
+      - testlab-network
+    deploy:
+      mode: replicated
+      replicas: 1
+
+    # Enables the web UI and tells Traefik to listen to docker
+    command: 
+      - --api.insecure=true 
+      - --providers.docker 
+      - --providers.docker.swarmMode=true
+      # - --providers.docker.endpoint=tcp://socket-proxy:2375
+    ports:
+    # The HTTP port
+      - "80:80"
+    # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+    # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
+    hostname: 'whoami.testlab.local'
+    networks:
+      - testlab-network
+    deploy:
+      labels:
+        - "traefik.http.routers.whoami.rule=Host(`whoami.testlab.local`)"      
+        - "traefik.http.services.whoami-service.loadbalancer.server.port=80"
+
+        # iwr http://127.0.0.1 -Headers @{'Host' = 'whoami.docker.localhost'}
+
+
+  # nexus:
+  #   image: sonatype/nexus3
+  #   hostname: 'nexus.testlab.local'
+  #   networks:
+  #     - traefik-public
+  #   volumes:
+  #     - nexus-home:/nexus-data
+  #   deploy:
+  #     mode: replicated
+  #     replicas: 1
+  #     labels:
+  #       - "traefik.http.routers.nexus.rule=Host(`nexus.testlab.local`)"
+  #       - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
+
+# volumes:
+#   # Create a volume to store the certificates, there is a constraint to make sure
+#   # Traefik is always deployed to the same Docker node with the same volume containing
+#   # the HTTPS certificates
+#   nexus-home:
+
+networks:
+  testlab-network:
+    external: true
+
