@@ -41,25 +41,25 @@ services:
         # iwr http://127.0.0.1 -Headers @{'Host' = 'whoami.docker.localhost'}
 
 
-  nexus:
-    image: sonatype/nexus3
-    hostname: 'nexus.testlab.local'
-    networks:
-      - traefik-public
-    volumes:
-      - nexus-home:/nexus-data
-    deploy:
-      mode: replicated
-      replicas: 1
-      labels:
-        - "traefik.http.routers.nexus.rule=Host(`nexus.testlab.local`)"
-        - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
+#   nexus:
+#     image: sonatype/nexus3
+#     hostname: 'nexus.testlab.local'
+#     networks:
+#       - traefik-public
+#     volumes:
+#       - nexus-home:/nexus-data
+#     deploy:
+#       mode: replicated
+#       replicas: 1
+#       labels:
+#         - "traefik.http.routers.nexus.rule=Host(`nexus.testlab.local`)"
+#         - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
 
-volumes:
-  # Create a volume to store the certificates, there is a constraint to make sure
-  # Traefik is always deployed to the same Docker node with the same volume containing
-  # the HTTPS certificates
-  nexus-home:
+# volumes:
+#   # Create a volume to store the certificates, there is a constraint to make sure
+#   # Traefik is always deployed to the same Docker node with the same volume containing
+#   # the HTTPS certificates
+#   nexus-home:
 
 networks:
   traefik-public:
