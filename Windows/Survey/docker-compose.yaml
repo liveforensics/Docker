@@ -1,0 +1,10 @@
+version: '3'
+
+services:  
+  WindowsSlave:
+    image: liveforensics/buildbox:2004-survey
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+  
