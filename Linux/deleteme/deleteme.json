@@ -1,0 +1,92 @@
+{
+    "routers": {
+        "api@internal": {
+            "entryPoints": ["traefik"],
+            "service": "api@internal",
+            "rule": "PathPrefix(`/api`)",
+            "priority": 2147483646,
+            "status": "enabled",
+            "using": ["traefik"]
+        },
+        "dashboard@internal": {
+            "entryPoints": ["traefik"],
+            "middlewares": ["dashboard_redirect@internal", "dashboard_stripprefix@internal"],
+            "service": "dashboard@internal",
+            "rule": "PathPrefix(`/`)",
+            "priority": 2147483645,
+            "status": "enabled",
+            "using": ["traefik"]
+        },
+        "reverse-proxy-deleteme@docker": {
+            "entryPoints": ["http"],
+            "service": "reverse-proxy-deleteme",
+            "rule": "Host(`reverse-proxy-deleteme`)",
+            "status": "enabled",
+            "using": ["http"]
+        },
+        "whoami@docker": {
+            "entryPoints": ["http"],
+            "service": "whoami-deleteme",
+            "rule": "Host(`whoami.docker.localhost`)",
+            "status": "enabled",
+            "using": ["http"]
+        }
+    },
+    "middlewares": {
+        "dashboard_redirect@internal": {
+            "redirectRegex": {
+                "regex": "^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$",
+                "replacement": "${1}/dashboard/",
+                "permanent": true
+            },
+            "status": "enabled",
+            "usedBy": ["dashboard@internal"]
+        },
+        "dashboard_stripprefix@internal": {
+            "stripPrefix": {
+                "prefixes": ["/dashboard/", "/dashboard"]
+            },
+            "status": "enabled",
+            "usedBy": ["dashboard@internal"]
+        }
+    },
+    "services": {
+        "api@internal": {
+            "status": "enabled",
+            "usedBy": ["api@internal"]
+        },
+        "dashboard@internal": {
+            "status": "enabled",
+            "usedBy": ["dashboard@internal"]
+        },
+        "noop@internal": {
+            "status": "enabled"
+        },
+        "reverse-proxy-deleteme@docker": {
+            "loadBalancer": {
+                "servers": [{
+                    "url": "http://172.18.0.2:80"
+                }],
+                "passHostHeader": true
+            },
+            "status": "enabled",
+            "usedBy": ["reverse-proxy-deleteme@docker"],
+            "serverStatus": {
+                "http://172.18.0.2:80": "UP"
+            }
+        },
+        "whoami-deleteme@docker": {
+            "loadBalancer": {
+                "servers": [{
+                    "url": "http://172.18.0.3:80"
+                }],
+                "passHostHeader": true
+            },
+            "status": "enabled",
+            "usedBy": ["whoami@docker"],
+            "serverStatus": {
+                "http://172.18.0.3:80": "UP"
+            }
+        }
+    }
+}

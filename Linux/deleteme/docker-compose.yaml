@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+    reverse-proxy:
+        # The official v2 Traefik docker image
+        image: traefik:v2.3.3
+        hostname: 'traefik.docker.localhost'
+        networks:
+        - traefik-public
+
+        # Enables the web UI and tells Traefik to listen to docker
+        command: --api.insecure=true --providers.docker
+        ports:
+        # The HTTP port
+        - "80:80"
+        # The Web UI (enabled by --api.insecure=true)
+        - "8080:8080"
+        volumes:
+        # So that Traefik can listen to the Docker events
+        - /var/run/docker.sock:/var/run/docker.sock
+
+    whoami:
+        # A container that exposes an API to show its IP address
+        image: traefik/whoami
+        networks:
+        - traefik-public
+        labels:
+            - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"      
+
+            # iwr http://127.0.0.1 -Headers @{'Host' = 'whoami.docker.localhost'}
+
+    portainer:
+        image: portainer/portainer-ce
+        hostname: 'portainer.docker.localhost'
+        labels:
+            - "traefik.http.routers.portainer.rule=Host(`portainer.docker.localhost`)"   
+            - "traefik.http.services.portainer-service.loadbalancer.server.port=9000"
+        networks:
+        - traefik-public
+        # ports:
+        #     - "9000:9000"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+
+
+volumes:
+  portainer_data:            
+
+networks:
+  traefik-public:
+    external: true
