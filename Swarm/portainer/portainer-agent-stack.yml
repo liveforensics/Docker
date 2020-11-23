@@ -48,7 +48,7 @@ services:
       mode: replicated
       replicas: 1
       placement:
-        constraints: [node.role == manager]
+        constraints: [node.platform.os == linux]
       labels:
         - "traefik.http.routers.portainer.rule=Host(`portainer.testlab.local`)"
         - "traefik.http.services.portainer-service.loadbalancer.server.port=9000"
