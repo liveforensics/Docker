@@ -21,26 +21,27 @@ services:
         - "traefik.http.routers.orchestrator.rule=Host(`jenkins.testlab.local`)"
         - "traefik.http.services.orchestrator-service.loadbalancer.server.port=8080"
 
-  # buildtoolsppc:
-  #   image: liveforensics/buildbox:2004-powerpc
-  #   networks:
-  #     - testlabnet
-  #   environment:
-  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080
-  #     - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
-  #     - JENKINS_AGENT_NAME=ppc
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     placement:
-  #       constraints: [node.platform.os == windows]
-  #     resources:
-  #       limits:
-  #         cpus: '0.50'
-  #         memory: 2G
-  #       reservations:
-  #         cpus: '0.25'
-  #         memory: 2G
+  buildtoolsppc:
+    image: liveforensics/buildbox:2004-powerpc
+    hostname: 'buildtoolsppc.testlab.local'
+    networks:
+      - testlab-network
+    environment:
+      - JENKINS_URL=http://orchestrator:8080
+      - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
+      - JENKINS_AGENT_NAME=ppc
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 2G
 
   # buildtools2019:
   #   image: liveforensics/buildbox:2004-buildtools2019
