@@ -2,7 +2,7 @@
 
 export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')
 export EMAIL=liveforensicsuk@gmail.com
-export DOMAIN=testlab.local
+export DOMAIN=murraykatt.net
 export USERNAME=admin
 export PASSWORD=rainbowlightning
 export HASHED_PASSWORD=$(openssl passwd -apr1 $PASSWORD)
