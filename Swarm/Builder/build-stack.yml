@@ -5,7 +5,8 @@ services:
     image: jenkins/jenkins:latest
     hostname: 'jenkins.testlab.local'
     networks:
-      - testlab-network
+      testlab-network:
+        ipv4_address: 10.12.1.2
     # ports:
     #     - "8080:8080"
     #     - "50000:50000"
