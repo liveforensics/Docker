@@ -28,7 +28,7 @@ services:
     networks:
       - testlab-network
     environment:
-      - JENKINS_URL=http://orchestrator:8080
+      - JENKINS_URL=http://tasks.orchestrator:8080
       - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
       - JENKINS_AGENT_NAME=ppc
     deploy:
