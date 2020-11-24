@@ -3,7 +3,7 @@ version: '3.2'
 services:
   orchestrator:
     image: jenkins/jenkins:latest
-    # hostname: 'jenkins.testlab.local'
+    hostname: 'jenkins.testlab.local'
     networks:
       testlab-network:
         ipv4_address: 10.12.1.2
@@ -24,10 +24,11 @@ services:
 
   buildtoolsppc:
     image: liveforensics/buildbox:2004-powerpc
-    # hostname: 'buildtoolsppc.testlab.local'
+    hostname: 'buildtoolsppc.testlab.local'
     networks:
       - testlab-network
     environment:
+    # notice the secret sauce here, you have to prefix container names with tasks. in order for the internal dns to resolve to the actual container!
       - JENKINS_URL=http://tasks.orchestrator:8080
       - JENKINS_SECRET=337c310420cb94b36afe963dbeba20fabf8457b446831632ede1705ffe6968f2
       - JENKINS_AGENT_NAME=ppc
@@ -44,26 +45,27 @@ services:
           cpus: '0.25'
           memory: 2G
 
-  # buildtools2019:
-  #   image: liveforensics/buildbox:2004-buildtools2019
-  #   networks:
-  #     - testlabnet
-  #   environment:
-  #     - JENKINS_URL=http://dockerhost01.testlab.local:8080
-  #     - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
-  #     - JENKINS_AGENT_NAME=buildtools2019
-  #   deploy:
-  #     mode: replicated
-  #     replicas: 1
-  #     placement:
-  #       constraints: [node.platform.os == windows]
-  #     resources:
-  #       limits:
-  #         cpus: '0.50'
-  #         memory: 2G
-  #       reservations:
-  #         cpus: '0.25'
-  #         memory: 2G
+  buildtools2019:
+    image: liveforensics/buildbox:2004-buildtools2019
+    hostname: 'buildtools2019.testlab.local'
+    networks:
+      - testlabnet
+    environment:
+      - JENKINS_URL=http://tasks.orchestrator:8080
+      - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
+      - JENKINS_AGENT_NAME=buildtools2019
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == windows]
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 2G
         
   # buildbox2:
   #   image: liveforensics/buildboxgcc:1.0.0-jenkins
@@ -122,7 +124,7 @@ services:
 
   nexus:
     image: sonatype/nexus3
-    # hostname: 'nexus.testlab.local'
+    hostname: 'nexus.testlab.local'
     networks:
       - testlab-network
     # ports:
