@@ -49,7 +49,7 @@ services:
     image: liveforensics/buildbox:2004-buildtools2019
     hostname: 'buildtools2019.testlab.local'
     networks:
-      - testlabnet
+      - testlab-network
     environment:
       - JENKINS_URL=http://tasks.orchestrator:8080
       - JENKINS_SECRET=99de84f5fb9517dc5ec0d2a985b193647ff18c244d54db8adedcf4f462cc6d91 
