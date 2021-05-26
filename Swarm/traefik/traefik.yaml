@@ -3,7 +3,7 @@ version: '3'
 services:
   reverse-proxy:
     # The official v2 Traefik docker image
-    image: traefik:v2.3.3
+    image: traefik:latest
     hostname: 'traefik.testlab.local'
     networks:
       - testlab-network
