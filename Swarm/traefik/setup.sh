@@ -1,4 +1,5 @@
 #!/bin/bash
+docker pull traefik:latest
 
 export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')
 export EMAIL=liveforensicsuk@gmail.com
