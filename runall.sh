@@ -1,18 +1,19 @@
 #!/bin/bash
 
 RED='\033[0;31m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 echo -e "${RED}Hello${NC} World"
 
 
-echo -e "***********************************************************************************************************************"
+echo -e "${YELLOW}***********************************************************************************************************************"
 echo -e "*                                                                                                                     *"
-echo -e "*  ${RED}STARTING ALL THE THINGS ${NC}                                                                                *"
+echo -e "*  ${RED}STARTING ALL THE THINGS ${YELLOW}                                                                                *"
 echo -e "*                                                                                                                     *"
-echo -e "*  ${RED}PULLING LATEST IMAGES  ${NC}                                                                                 *"
+echo -e "*  ${RED}PULLING LATEST IMAGES  ${YELLOW}                                                                                 *"
 echo -e "*                                                                                                                     *"
-echo -e "***********************************************************************************************************************"
+echo -e "***********************************************************************************************************************${NC}"
 
 docker pull traefik:latest
 docker pull portainer/portainer-ce
