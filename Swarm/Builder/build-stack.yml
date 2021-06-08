@@ -66,6 +66,20 @@ services:
         reservations:
           cpus: '0.25'
           memory: 2G
+
+  linuxdockeragent:
+    image: liveforensics/linuxdockerslave:latest
+    hostname: linuxdockerslave.testlab.local
+    networks:
+      - testlab-network
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.platform.os == linux]    
+
         
   # buildbox2:
   #   image: liveforensics/buildboxgcc:1.0.0-jenkins
