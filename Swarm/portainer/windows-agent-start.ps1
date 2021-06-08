@@ -1,4 +1,4 @@
-    docker pull portainer:agent:latest
+    docker pull portainer/agent:latest
     docker kill portainer_agent
     docker rm portainer_agent
     
