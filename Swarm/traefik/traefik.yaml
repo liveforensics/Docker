@@ -16,7 +16,7 @@ services:
       - --api.insecure=true 
       - --providers.docker 
       - --providers.docker.swarmMode=true
-      - --entrypoints.web.address=:80
+      - --entrypoints.http.address=:80
       - --entrypoints.orchestrator.address=:50001
     ports:
     # The HTTP port
