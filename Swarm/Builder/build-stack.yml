@@ -24,7 +24,7 @@ services:
         - "traefik.tcp.routers.orchestrator.entrypoints=orchestrator"
         - "traefik.tcp.routers.orchestrator.rule=Host(`jenkins.testlab.local`)"
         - "traefik.tcp.services.orchestrator.loadbalancer.server.port=50000"
-        - "traefik.tcp.routers.orchestrator.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.orchestrator.rule=HostSNI(`jenkins.testlab.local`)"
 
   buildtoolsppc:
     image: liveforensics/buildbox:2004-powerpc
