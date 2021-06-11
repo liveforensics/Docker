@@ -1,0 +1,7 @@
+# Add the following to your hosts file to enable the traefik reverse proxy
+192.168.200.54 portainer.testlab.local
+192.168.200.54 jenkins.testlab.local
+192.168.200.54 nexus.testlab.local
+192.168.200.54 traefik.testlab.local
+
+

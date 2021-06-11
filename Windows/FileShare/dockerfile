@@ -1,0 +1,12 @@
+# escape=`
+
+FROM mcr.microsoft.com/windows/servercore:2004-amd64
+LABEL maintainer=liveforensics description="Windows File Share Mount Experiment"
+
+# Restore the default Windows shell for correct batch processing.
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+ADD Wait-Service.ps1 Wait-Service.ps1
+
+
+ENTRYPOINT ["powershell.exe", "-file", "c:\\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart"]

@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+    shark:
+        image: liveforensics/fileshare:latest
+        container_name: shark2004
+        build:
+            context: .
+            dockerfile: dockerfile

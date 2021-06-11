@@ -34,7 +34,7 @@ echo .
 echo .
 echo .
 echo .
-
+docker network rm testlab-network
 docker node ls
 docker service ls
 

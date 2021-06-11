@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    licster:
+        image: liveforensics/licster:1.0
+        container_name: licster
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+        volumes:
+          - G:\Code\LICSTER:/home/licster
+                    
+networks:
+    local-network:
+        driver: bridge
+        
