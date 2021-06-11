@@ -1,0 +1,26 @@
+pipeline {
+    agent {
+        node {
+            label 'WinDockerBuildAgent'
+        }
+    }
+    stages {
+        stage('Stage 2') {
+            steps {
+                script {
+                    try {
+                        def status = bat(returnStatus: true, script: 'docker ps')
+                        if(status != 0) {
+                            error('DOCKER PULL FAILED') 
+                        }
+                    }
+                    catch (ex) {
+                        echo "Caught: ${ex}"
+                        throw ex
+                    }
+                    
+                }                          
+            }
+        }
+    }
+}
