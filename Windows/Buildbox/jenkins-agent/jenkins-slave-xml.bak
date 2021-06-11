@@ -41,11 +41,10 @@ THE SOFTWARE.
     The following value assumes that you have java in your PATH.
   -->
   <executable>%JAVA_HOME%\bin\java.exe</executable>
-  <arguments>-Xrs -Xmx64m -jar "c:\Jenkins\agent.jar" -jnlpUrl %JENKINS_URL% -secret %JENKINS_SECRET% -workDir c:\JenkinsRoot</arguments>
+  <arguments>-Xrs -Xmx64m -jar "c:\Jenkins\slave.jar" -jnlpUrl %JENKINS_URL% -secret %JENKINS_SECRET% -workDir c:\JenkinsRoot</arguments>
   <!--
     interactive flag causes the empty black Java window to be displayed.
     I'm still debugging this.
-    java -jar agent.jar -jnlpUrl http://localhost:8080/computer/testme/slave-agent.jnlp -secret 279c70b19bcf270773231bd11fcdc667dd9e8b5555839d12ca9e91f921d43a85 -workDir "c:\jenkinsroot"
   <interactive />
   -->
   <logmode>rotate</logmode>
