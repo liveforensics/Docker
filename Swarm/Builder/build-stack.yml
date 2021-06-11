@@ -136,6 +136,7 @@ services:
       labels:
         - "traefik.http.routers.nexus.rule=Host(`nexus.testlab.local`)"
         - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
+        - "traefik.http.routers.nexus.entrypoints=http"
 
 # networks:
 #   testlabnet:

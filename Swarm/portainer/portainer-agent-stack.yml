@@ -52,6 +52,7 @@ services:
       labels:
         - "traefik.http.routers.portainer.rule=Host(`portainer.testlab.local`)"
         - "traefik.http.services.portainer-service.loadbalancer.server.port=9000"
+        - "traefik.http.routers.portainer.entrypoints=http"
 
 
 # networks:
