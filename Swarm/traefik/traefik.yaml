@@ -16,6 +16,7 @@ services:
       - --api.insecure=true 
       - --providers.docker 
       - --providers.docker.swarmMode=true
+      - --entrypoints.orchestrator.address=:50001
     ports:
     # The HTTP port
       - "80:80"
