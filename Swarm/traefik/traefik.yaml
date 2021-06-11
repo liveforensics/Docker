@@ -21,7 +21,7 @@ services:
       - "80:80"
     # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
-      - "50000:50000"
+      - "50001:50000"
     volumes:
     # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
