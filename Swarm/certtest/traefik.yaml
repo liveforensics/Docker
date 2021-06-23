@@ -22,10 +22,19 @@ services:
       - --providers.docker 
       - --providers.docker.swarmMode=true
       - --entrypoints.http.address=:80
-
-    labels:
       # Add a constraint to only use services with the label "traefik.constraint-label=traefik-public"
       - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
+
+    labels:
+      # Enable Traefik for this service, to make it available in the public network
+        - traefik.enable=true
+        # Use the traefik-public network (declared below)
+        - traefik.docker.network=certtest-network
+        # Use the custom label "traefik.constraint-label=traefik-public"
+        # This public Traefik will only use services with this label
+        # That way you can add other internal Traefik instances per stack if needed
+        - traefik.constraint-label=traefik-public
+      
     ports:
     # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
       - 80:80
