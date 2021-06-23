@@ -23,7 +23,7 @@ services:
       - --providers.docker.swarmMode=true
       - --entrypoints.http.address=:80
       # Add a constraint to only use services with the label "traefik.constraint-label=traefik-public"
-      - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
+      # - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
 
     labels:
       # Enable Traefik for this service, to make it available in the public network
