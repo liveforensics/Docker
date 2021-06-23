@@ -68,7 +68,7 @@ services:
         # Force TLS
         - "traefik.http.routers.whoami.tls=true"  
         # Send traffic to the container via port 8080
-        - "traefik.http.services.whoami-service.loadbalancer.server.port=8080"
+        - "traefik.http.services.whoami-service.loadbalancer.server.port=80"
 
 networks:
   certtest-network:
