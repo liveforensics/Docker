@@ -10,11 +10,11 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          # Make the traefik service run only on the node with this label
-          # as the node with it has the volume for the certificates
-          - node.labels.traefik-public.traefik-public-certificates == true
+      # placement:
+      #   constraints:
+      #     # Make the traefik service run only on the node with this label
+      #     # as the node with it has the volume for the certificates
+      #     - node.labels.traefik-public.traefik-public-certificates == true
 
     # Enables the web UI and tells Traefik to listen to docker
     command: 
