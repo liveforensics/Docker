@@ -22,6 +22,8 @@ services:
       - --providers.docker 
       - --providers.docker.swarmMode=true
       - --entrypoints.http.address=:80
+
+    labels:
       # Add a constraint to only use services with the label "traefik.constraint-label=traefik-public"
       - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
     ports:
