@@ -27,6 +27,7 @@ services:
       - --entrypoints.https.address=:443
       # Add a constraint to only use services with the label "traefik.constraint-label=traefik-public"
       # - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
+      - --providers.file.directory=/certificates
 
     labels:
       # Enable Traefik for this service, to make it available in the public network
