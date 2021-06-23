@@ -49,8 +49,7 @@ services:
       # Add Docker as a mounted volume, so that Traefik can read the labels of other services
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # Mount the volume to store the certificates
-      - traefik-public-certificates:/certificates
-      - /home/sysadmin/docker-shared/user-volumes/traefik/traefik-public-certificates:/var/jenkins_home
+      - /home/sysadmin/docker-shared/user-volumes/traefik/traefik-public-certificates:/certificates
 
 
 
@@ -64,12 +63,6 @@ services:
       labels:
         - "traefik.http.routers.whoami.rule=Host(`whoami.mark-morley.co.uk`)"      
         - "traefik.http.services.whoami-service.loadbalancer.server.port=80"
-
-volumes:
-  # Create a volume to store the certificates, there is a constraint to make sure
-  # Traefik is always deployed to the same Docker node with the same volume containing
-  # the HTTPS certificates
-  traefik-public-certificates:
 
 networks:
   certtest-network:
