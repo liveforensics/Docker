@@ -20,6 +20,7 @@ services:
         constraints: [node.role == manager]
       labels:
         - "traefik.http.routers.orchestrator.rule=Host(`jenkins.testlab.local`)"
+        - "traefik.http.routers.orchestrator.rule=Host(`jenkins.mark.net`)"
         - "traefik.http.services.orchestrator.loadbalancer.server.port=8080"
         - "traefik.http.routers.orchestrator.entrypoints=http"
         - "traefik.tcp.routers.orchestrator.entrypoints=orchestrator"
