@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.3'
 
 services:
   reverse-proxy:
@@ -10,6 +10,11 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      placement:
+        constraints:
+          # Make the traefik service run only on the node with this label
+          # as the node with it has the volume for the certificates
+          - node.labels.traefik-public.traefik-public-certificates == true
 
     # Enables the web UI and tells Traefik to listen to docker
     command: 
@@ -18,8 +23,10 @@ services:
       - --providers.docker.swarmMode=true
       - --entrypoints.http.address=:80
     ports:
-    # The HTTP port
-      - "80:80"
+    # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
+      - 80:80
+      # Listen on port 443, default for HTTPS
+      - 443:443
     # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
@@ -40,14 +47,12 @@ services:
         - "traefik.http.routers.whoami.rule=Host(`whoami.mark-morley.co.uk`)"      
         - "traefik.http.services.whoami-service.loadbalancer.server.port=80"
 
-  #       # iwr http://127.0.0.1 -Headers @{'Host' = 'whoami.docker.localhost'}
-
 volumes:
   # Create a volume to store the certificates, there is a constraint to make sure
   # Traefik is always deployed to the same Docker node with the same volume containing
   # the HTTPS certificates
   traefik-public-certificates:
-  
+
 networks:
   certtest-network:
     driver: overlay
