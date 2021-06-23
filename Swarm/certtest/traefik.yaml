@@ -21,7 +21,10 @@ services:
       - --api.insecure=true 
       - --providers.docker 
       - --providers.docker.swarmMode=true
+      # Create an entrypoint "http" listening on port 80
       - --entrypoints.http.address=:80
+      # Create an entrypoint "https" listening on port 443
+      - --entrypoints.https.address=:443
       # Add a constraint to only use services with the label "traefik.constraint-label=traefik-public"
       # - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
 
@@ -47,6 +50,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # Mount the volume to store the certificates
       - traefik-public-certificates:/certificates
+      - /home/sysadmin/docker-shared/user-volumes/traefik/traefik-public-certificates:/var/jenkins_home
+
 
 
   whoami:
