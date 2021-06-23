@@ -1,4 +1,4 @@
 tls:
   certificates:
-    - certFile: /certificates/certificate.crt
-      keyFile: /certificates/private.key
+    - certFile: /certificates/mark-morley.crt
+      keyFile: /certificates/mark-morley.key

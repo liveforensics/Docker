@@ -62,7 +62,7 @@ services:
       - certtest-network
     deploy:
       labels:
-        - "traefik.http.routers.whoami.rule=Host(`www.mark-morley.co.uk`)"    
+        - "traefik.http.routers.whoami.rule=Host(`whoami.mark-morley.co.uk`)"    
         # Create a router called whoami listening on the websecure entrypoint
         - "traefik.http.routers.whoami.entrypoints=https"
         # Force TLS
