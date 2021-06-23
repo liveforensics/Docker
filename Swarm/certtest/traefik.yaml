@@ -50,7 +50,7 @@ services:
       # Add Docker as a mounted volume, so that Traefik can read the labels of other services
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # Mount the volume to store the certificates
-      - /home/sysadmin/docker-shared/user-volumes/traefik/traefik-public-certificates:/certificates
+      - /home/sysadmin/docker-shared/user-volumes/traefik/traefik-public-certificates:/certificates:ro
 
 
 
