@@ -22,6 +22,6 @@ RUN printf "n\n1\n" | bash build.sh
 
 #Start the server
 # CMD node server.js
-CMD ["/bin/run.sh"]
+ENTRYPOINT ["/bin/run.sh"]
 # ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 
