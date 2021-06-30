@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    plc:
+        image: liveforensics/plc:1.0.0
+        container_name: plc
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+        ports:
+            - "30022:22"
+                    
+networks:
+    local-network:
+        driver: bridge
+        
