@@ -11,6 +11,7 @@ services:
             - local-network
         ports:
             - "30022:22"
+            - "8080:8080"
                     
 networks:
     local-network:
