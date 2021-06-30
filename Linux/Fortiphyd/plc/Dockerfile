@@ -7,9 +7,11 @@ RUN dnf update -y && `
 
 WORKDIR /usr/local/src/
 
-RUN git clone https://github.com/thiagoralves/OpenPLC_v2.git && `
-    find . -type f -exec dos2unix {} \; && `
-    printf "n\n1\n" | bash /usr/local/src/OpenPLC_v2/build.sh
+RUN git clone https://github.com/thiagoralves/OpenPLC_v2.git
+
+RUN find . -type f -exec dos2unix {} \;
+
+RUN printf "n\n1\n" | bash /usr/local/src/OpenPLC_v2/build.sh
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 
