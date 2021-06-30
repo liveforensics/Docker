@@ -5,7 +5,9 @@ RUN dnf update -y && `
     dnf install sudo dos2unix gcc gcc-c++ make pkg-config bison flex autoconf automake libtool nodejs git -y && `
     dnf clean all
 
+WORKDIR /usr/local/src/
 
+RUN git clone https://github.com/thiagoralves/OpenPLC_v2.git
 
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
