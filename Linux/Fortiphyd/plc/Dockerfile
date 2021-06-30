@@ -11,7 +11,9 @@ RUN git clone https://github.com/thiagoralves/OpenPLC_v2.git
 
 RUN find . -type f -exec dos2unix {} \;
 
-# RUN printf "n\n1\n" | bash /usr/local/src/OpenPLC_v2/build.sh
+WORKDIR /usr/local/src/OpenPLC_v2
+
+RUN printf "n\n1\n" | bash build.sh
 
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 
