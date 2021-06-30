@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    centosbase:
+        image: liveforensics/centosbase:1.0.0
+        container_name: centosbase
+        build:
+            context: .
+            dockerfile: Dockerfile
+        networks:
+            - local-network
+                    
+networks:
+    local-network:
+        driver: bridge
+        
