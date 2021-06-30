@@ -15,5 +15,8 @@ WORKDIR /usr/local/src/OpenPLC_v2
 
 RUN printf "n\n1\n" | bash build.sh
 
+#Start the server
+CMD node server.js
+
 ENTRYPOINT ["/usr/sbin/sshd", "-D"]
 
