@@ -9,6 +9,8 @@ services:
             dockerfile: Dockerfile
         networks:
             - local-network
+        ports:
+            - "30022:22"
                     
 networks:
     local-network:
