@@ -34,7 +34,8 @@ networks:
       driver: default
       config:
         - subnet: 192.168.95.0/24
-        # - gateway: 192.168.95.1
+          gateway: 192.168.95.1
+          ip_range: 192.168.95.64/26
   90-network:
     driver: macvlan
     driver_opts:
