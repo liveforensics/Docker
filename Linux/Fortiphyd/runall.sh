@@ -1,1 +1,1 @@
-docker stack run -c fort-stack.yaml fortiphyd
+docker stack deploy --compose-file=fort-stack.yaml fortiphyd
