@@ -25,48 +25,48 @@ services:
       - "30022:22"
       - "8080:8080"
                     
-# networks:
-#   95-network:
-#     driver: macvlan
-#     driver_opts:
-#       parent: ens256
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 192.168.95.0/24
-#           gateway: 192.168.95.1
-#           ip_range: 192.168.95.64/26
-#   90-network:
-#     driver: macvlan
-#     driver_opts:
-#       parent: ens224
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 192.168.90.0/24
-#         # - gateway: 192.168.95.100
-
 networks:
-  dockervlan90:
-    #This interface should be defined as using null driver. Do not remove it.
-    driver: null
+  95-network:
+    driver: macvlan
     driver_opts:
-      parent: ens224
+      parent: ens256
     ipam:
+      driver: default
       config:
-        - subnet: "192.168.90.0/24"
-          ip_range: "192.168.90.64/26"
-          gateway: "192.168.90.1"
-  dockervlan90:
-    #This is the interface which is used for containers networking
+        - subnet: 192.168.95.0/24
+          gateway: 192.168.95.1
+          ip_range: 192.168.95.64/26
+  90-network:
     driver: macvlan
     driver_opts:
       parent: ens224
     ipam:
+      driver: default
       config:
-        - subnet: "192.168.90.0/24"
-          ip_range: "192.168.90.64/26"
-          gateway: "192.168.90.1"
+        - subnet: 192.168.90.0/24
+        # - gateway: 192.168.95.100
+
+# networks:
+#   dockervlan90:
+#     #This interface should be defined as using null driver. Do not remove it.
+#     driver: null
+#     driver_opts:
+#       parent: ens224
+#     ipam:
+#       config:
+#         - subnet: "192.168.90.0/24"
+#           ip_range: "192.168.90.64/26"
+#           gateway: "192.168.90.1"
+#   dockervlan90:
+#     #This is the interface which is used for containers networking
+#     driver: macvlan
+#     driver_opts:
+#       parent: ens224
+#     ipam:
+#       config:
+#         - subnet: "192.168.90.0/24"
+#           ip_range: "192.168.90.64/26"
+#           gateway: "192.168.90.1"
   testlab-network:
     driver: bridge
 
