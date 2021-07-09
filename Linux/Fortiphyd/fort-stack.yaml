@@ -17,9 +17,9 @@ services:
     container_name: plc
     networks:
       95-network:
-        ipv4_address: 192.168.95.200
+        ipv4_address: 192.168.95.66
       90-network:
-        ipv4_address: 192.168.90.60
+        ipv4_address: 192.168.90.66
 
     ports:
       - "30022:22"
