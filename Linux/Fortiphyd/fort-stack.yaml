@@ -18,6 +18,9 @@ services:
     networks:
       95-network:
         ipv4_address: 192.168.95.200
+      90-network:
+        ipv4_address: 192.168.90.200
+
     ports:
       - "30022:22"
       - "8080:8080"
@@ -32,15 +35,15 @@ networks:
       config:
         - subnet: 192.168.95.0/24
         # - gateway: 192.168.95.1
-  # 90-network:
-  #   driver: macvlan
-  #   driver_opts:
-  #     parent: ens256
-  #   ipam:
-  #     driver: default
-  #     config:
-  #       - subnet: 192.168.90.0/24
-  #       # - gateway: 192.168.95.100
+  90-network:
+    driver: macvlan
+    driver_opts:
+      parent: ens224
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.90.0/24
+        # - gateway: 192.168.95.100
   testlab-network:
     driver: bridge
 
