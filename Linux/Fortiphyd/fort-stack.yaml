@@ -6,7 +6,7 @@ services:
     hostname: 'fortport.testlab.local'
     ports:
       - "9000:9000"
-    volumes:
+    volumes:6
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     networks:
@@ -16,35 +16,57 @@ services:
     image: liveforensics/plc:1.0.0
     container_name: plc
     networks:
-      95-network:
-        ipv4_address: 192.168.95.200
-      90-network:
-        ipv4_address: 192.168.90.200
+      # 95-network:
+      #   ipv4_address: 192.168.95.200
+      dockervlan90:
+        ipv4_address: 192.168.90.60
 
     ports:
       - "30022:22"
       - "8080:8080"
                     
+# networks:
+#   95-network:
+#     driver: macvlan
+#     driver_opts:
+#       parent: ens256
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 192.168.95.0/24
+#           gateway: 192.168.95.1
+#           ip_range: 192.168.95.64/26
+#   90-network:
+#     driver: macvlan
+#     driver_opts:
+#       parent: ens224
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 192.168.90.0/24
+#         # - gateway: 192.168.95.100
+
 networks:
-  95-network:
-    driver: macvlan
+  dockervlan90:
+    #This interface should be defined as using null driver. Do not remove it.
+    driver: null
     driver_opts:
-      parent: ens256
+      parent: ens224
     ipam:
-      driver: default
       config:
-        - subnet: 192.168.95.0/24
-          gateway: 192.168.95.1
-          ip_range: 192.168.95.64/26
-  90-network:
+        - subnet: "192.168.90.0/24"
+          ip_range: "192.168.90.64/26"
+          gateway: "192.168.90.1"
+  dockervlan90:
+    #This is the interface which is used for containers networking
     driver: macvlan
     driver_opts:
       parent: ens224
     ipam:
-      driver: default
       config:
-        - subnet: 192.168.90.0/24
-        # - gateway: 192.168.95.100
+        - subnet: "192.168.90.0/24"
+          ip_range: "192.168.90.64/26"
+          gateway: "192.168.90.1"
   testlab-network:
     driver: bridge
 
