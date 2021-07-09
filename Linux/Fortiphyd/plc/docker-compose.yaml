@@ -8,12 +8,13 @@ services:
             context: .
             dockerfile: Dockerfile
         networks:
-            - local-network
+            - 95-network
         ports:
             - "30022:22"
             - "8080:8080"
                     
 networks:
-    local-network:
+    95-network:
         driver: bridge
+    90-network:
         
