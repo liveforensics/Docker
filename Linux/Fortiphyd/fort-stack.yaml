@@ -12,11 +12,6 @@ services:
       - portainer_data:/data
     networks:
       - 95-network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.platform.os == linux]
         
   plc:
     image: liveforensics/plc:1.0.0
