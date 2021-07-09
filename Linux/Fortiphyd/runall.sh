@@ -1,1 +1,1 @@
-docker-compose -f fort-stack.yaml up -d fortiphyd
+docker-compose -f fort-stack.yaml up -d fortiphyd 

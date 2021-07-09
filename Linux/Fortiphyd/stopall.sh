@@ -1,1 +1,1 @@
-docker-compose -f fort-stack.yaml down
+docker-compose -f fort-stack.yaml down 
