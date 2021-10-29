@@ -1,0 +1,16 @@
+# escape=`
+
+FROM mcr.microsoft.com/windows/servercore:1909
+
+# Reset the shell.
+SHELL ["cmd", "/S", "/C"]
+RUN SETX /M Path "%Path%;C:\Program Files (x86)\Microsoft Visual Studio\VB98;"
+
+# SHELL ["powershell", "-ExecutionPolicy Unrestricted", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+# ADD Wait-Service.ps1 Wait-Service.ps1
+# ADD vb6setup.ps1 .
+# RUN .\vb6setup.ps1
+WORKDIR c:\vb6
+
+
+# ENTRYPOINT ["powershell.exe", "-file", "c:\\Wait-Service.ps1", "-ServiceName", "EventLog", "-AllowServiceRestart"]

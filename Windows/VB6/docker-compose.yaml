@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  buildboxvb6:
+    image: liveforensics/buildbox:vb6-temp
+    container_name: vb6
+    build:
+      context: .
+      dockerfile: dockerfile
