@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+    memprocfs:
+        image: liveforensics/memprocfs:1.0.0
+        container_name: memprocfs
+        build:
+            context: .
+            dockerfile: Dockerfile
+  
